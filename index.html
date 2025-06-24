@@ -274,8 +274,8 @@
             const urlParams = new URLSearchParams(window.location.search); // ✅ moved to top
 
             Promise.all([
-                fetch("https://karrykraze.com//products/products.json").then(res => res.json()),
-                fetch("https://karrykraze.com//products/promotion.json").then(res => res.json())
+                fetch("https://karrykraze.com/products/products.json").then(res => res.json()),
+                fetch("https://karrykraze.com/products/promotion.json").then(res => res.json())
             ]).then(([products, promotionsFile]) => {
                 const promotions = promotionsFile.promotions || [];
                 const updatedProducts = applyPromotionsToProducts(products, promotions);
@@ -287,11 +287,12 @@
                 }
 
                 // 🧩 Render product cards
-                Object.entries(updatedProducts).forEach(([_, p]) => {
-                    if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return; // ✅ Only include items tagged with designerbags
-                    const html = renderCatalogCard(p);
+                Object.entries(updatedProducts).forEach(([key, p]) => {
+                    if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
+                    const html = renderCatalogCard(p, key);
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
 
 
 
