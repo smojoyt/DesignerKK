@@ -1,0 +1,782 @@
+<link as="script" href="//jemmawynne.com/cdn/shop/t/8/assets/vendor.js?v=93779096473886333451731991704" rel="preload" />
+<link as="script" href="//jemmawynne.com/cdn/shop/t/8/assets/theme.js?v=76068313012163680871731991704" rel="preload" />
+
+<div class="header__mobile">
+    <div class="disabled header__mobile__left">
+        <div class="header__mobile__button">
+            <button class="header__mobile__hamburger caps"
+                    data-drawer-toggle="hamburger"
+                    aria-label="Show menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="header-menu">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-menu" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+        </div>
+        <!--Disabled Search Button-->
+        <div class="header__mobile__button caps" style="display:none;">
+            <header-search-popdown>
+                <details>
+                    <summary class="navlink navlink--search" aria-haspopup="dialog" data-popdown-toggle title="Search">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 24 24"><g stroke="currentColor"><path d="M10.85 2c2.444 0 4.657.99 6.258 2.592A8.85 8.85 0 1 1 10.85 2ZM17.122 17.122 22 22" /></g></svg><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cancel" viewBox="0 0 24 24"><path d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Search</span>
+                    </summary><div class="search-popdown" role="dialog" aria-modal="true" aria-label="Search" data-popdown>
+                        <div class="wrapper">
+                            <div class="search-popdown__main">
+                                <header-search-form>
+                                    <form class="search-form"
+                                          action="/search"
+                                          method="get"
+                                          role="search">
+                                        <input name="options[prefix]" type="hidden" value="last">
+
+                                        <button class="search-popdown__submit" type="submit" aria-label="Search"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 24 24"><g stroke="currentColor"><path d="M10.85 2c2.444 0 4.657.99 6.258 2.592A8.85 8.85 0 1 1 10.85 2ZM17.122 17.122 22 22" /></g></svg></button>
+
+                                        <div class="input-holder">
+                                            <label for="SearchInput--mobile" class="visually-hidden">Search</label>
+                                            <input type="search"
+                                                   id="SearchInput--mobile"
+                                                   data-predictive-search-input="search-popdown-results"
+                                                   name="q"
+                                                   value=""
+                                                   placeholder="Search"
+                                                   role="combobox"
+                                                   aria-label="Search our store"
+                                                   aria-owns="predictive-search-results"
+                                                   aria-controls="predictive-search-results"
+                                                   aria-expanded="false"
+                                                   aria-haspopup="listbox"
+                                                   aria-autocomplete="list"
+                                                   autocorrect="off"
+                                                   autocomplete="off"
+                                                   autocapitalize="off"
+                                                   spellcheck="false">
+                                            <button type="reset" class="search-reset hidden" aria-label="Reset">Clear</button>
+                                        </div>
+                                    </form>
+                                </header-search-form><div class="search-popdown__close">
+                                    <button type="button" class="search-popdown__close__button" title="Close" data-popdown-close><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cancel" viewBox="0 0 24 24"><path d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="drawer__underlay" data-popdown-underlay></span>
+                </details>
+            </header-search-popdown>
+        </div>
+    </div>
+
+    <div class="header__logo header__logo--image">
+        <a class="header__logo__link"
+           href="/">
+            <figure class="logo__img logo__img--color image-wrapper lazy-image is-loading" style="--aspect-ratio: 13.319148936170214;--aspect-ratio-mobile: 13.319148936170214;">
+                <img src="imgs/Logo/Long/LL_Black_01.png"  sizes="350px" fetchpriority="high" class=" is-loading ">
+            </figure>
+        </a>
+    </div>
+
+    <div class="disabled header__mobile__right caps">
+        <!--Disabled Cart Buttons-->
+        <div class="header__mobile__button">
+            <a href="/cart" class="navlink navlink--cart navlink--cart--icon" data-cart-toggle>
+                <div class="navlink__cart__content">
+                    <span class="visually-hidden">Cart</span>
+
+                    <span class="header__cart__status__holder">
+                        <span class="header__cart__status" data-status-separator=": " data-cart-count="0">
+                            0
+                        </span><!-- /snippets/social-icon.liquid -->
+
+
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-bag" viewBox="0 0 24 24"><path d="m19.26 9.696 1.385 9A2 2 0 0 1 18.67 21H5.33a2 2 0 0 1-1.977-2.304l1.385-9A2 2 0 0 1 6.716 8h10.568a2 2 0 0 1 1.977 1.696zM14 5a2 2 0 1 0-4 0" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<nav class="drawer drawer--header caps"
+     data-drawer="hamburger"
+     aria-label="Menu"
+     id="header-menu">
+    <div class="drawer__inner" data-drawer-inner>
+        <header class="drawer__head">
+            <button class="drawer__close"
+                    data-drawer-toggle="hamburger"
+                    aria-label="Show menu"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                    aria-controls="header-menu">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cancel" viewBox="0 0 24 24"><path d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+        </header>
+
+        <div class="drawer__body">
+            <div class="drawer__content" data-drawer-content>
+                <div class="drawer__menu" data-sliderule-pane="0" data-scroll-lock-scrollable>
+                    <div class="sliderule__wrapper">
+                        <button class="sliderow" type="button"
+                                data-animates="0"
+                                data-animation="drawer-items-fade"
+                                data-animation-delay="250"
+                                data-animation-duration="500"
+                                data-sliderule-open="sliderule-2d2980d26c35727fc9a8e8cf3879d395">
+                            <span class="sliderow__title">
+                                SHOP
+                                <span class="sliderule__chevron--right">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-right" viewBox="0 0 24 24"><path d="M6 12h12.5m0 0-6-6m6 6-6 6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Show menu</span>
+                                </span>
+                            </span>
+                        </button>
+
+                        <div class="mobile__menu__dropdown sliderule__panel"
+                             id="sliderule-2d2980d26c35727fc9a8e8cf3879d395"
+                             data-sliderule="1"
+                             data-scroll-lock-scrollable>
+                            <div class="sliderow sliderow--back"
+                                 data-animates="1"
+                                 data-animation="drawer-items-fade"
+                                 data-animation-delay="50"
+                                 data-animation-duration="500">
+                                <button class="sliderow__back-button" type="button" data-sliderule-close="sliderule-2d2980d26c35727fc9a8e8cf3879d395">
+                                    <span class="sliderule__chevron--left">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-left" viewBox="0 0 24 24"><path d="M18.5 12H6m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Exit menu</span>
+                                    </span>
+                                </button>
+                                <a class="sliderow__title" href="/collections/all">SHOP</a>
+                            </div>
+                            <div class="sliderow__links" data-links>
+
+                                <div class="sliderule-grid blocks-6">
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="250"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/rings" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Rings
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=3600&amp;v=1697848735&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=180&amp;v=1697848735&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=360&amp;v=1697848735&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=540&amp;v=1697848735&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=720&amp;v=1697848735&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=900&amp;v=1697848735&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=1080&amp;v=1697848735&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=1296&amp;v=1697848735&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=1512&amp;v=1697848735&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=1728&amp;v=1697848735&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=1950&amp;v=1697848735&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=2100&amp;v=1697848735&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=2260&amp;v=1697848735&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=2450&amp;v=1697848735&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=2700&amp;v=1697848735&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=3000&amp;v=1697848735&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?crop=center&amp;height=3350&amp;v=1697848735&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/c90ba520bde705cbbb33e0622309a1ddf2547f51-900x900.webp?v=1697848735&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="300"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/two-stone-rings" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Two Stone Rings
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=3600&amp;v=1697848735&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=180&amp;v=1697848735&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=360&amp;v=1697848735&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=540&amp;v=1697848735&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=720&amp;v=1697848735&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=900&amp;v=1697848735&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=1080&amp;v=1697848735&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=1296&amp;v=1697848735&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=1512&amp;v=1697848735&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=1728&amp;v=1697848735&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=1950&amp;v=1697848735&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=2100&amp;v=1697848735&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=2260&amp;v=1697848735&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=2450&amp;v=1697848735&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=2700&amp;v=1697848735&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=3000&amp;v=1697848735&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?crop=center&amp;height=3350&amp;v=1697848735&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/f91a886f1d90b18b21d3db89d7e8a682fa739319-900x900.webp?v=1697848735&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="350"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/pendants" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Pendants
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.1;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=3600&amp;v=1697848734&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=180&amp;v=1697848734&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=360&amp;v=1697848734&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=540&amp;v=1697848734&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=720&amp;v=1697848734&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=900&amp;v=1697848734&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=1080&amp;v=1697848734&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=1296&amp;v=1697848734&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=1512&amp;v=1697848734&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=1728&amp;v=1697848734&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=1950&amp;v=1697848734&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=2100&amp;v=1697848734&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=2260&amp;v=1697848734&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=2450&amp;v=1697848734&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=2700&amp;v=1697848734&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=3000&amp;v=1697848734&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?crop=center&amp;height=3350&amp;v=1697848734&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/867d9f7a30c616cb67bd3f7d32af4a093f5646cd-900x900.webp?v=1697848734&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="400"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/earrings" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Earrings
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=3600&amp;v=1697848735&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=180&amp;v=1697848735&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=360&amp;v=1697848735&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=540&amp;v=1697848735&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=720&amp;v=1697848735&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=900&amp;v=1697848735&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=1080&amp;v=1697848735&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=1296&amp;v=1697848735&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=1512&amp;v=1697848735&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=1728&amp;v=1697848735&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=1950&amp;v=1697848735&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=2100&amp;v=1697848735&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=2260&amp;v=1697848735&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=2450&amp;v=1697848735&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=2700&amp;v=1697848735&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=3000&amp;v=1697848735&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?crop=center&amp;height=3350&amp;v=1697848735&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/ca5fad149d62aff040c0decfc722c2894f58f546-900x900.webp?v=1697848735&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="450"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/bracelets" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Bracelets
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=3600&amp;v=1697848735&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=180&amp;v=1697848735&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=360&amp;v=1697848735&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=540&amp;v=1697848735&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=720&amp;v=1697848735&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=900&amp;v=1697848735&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=1080&amp;v=1697848735&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=1296&amp;v=1697848735&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=1512&amp;v=1697848735&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=1728&amp;v=1697848735&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=1950&amp;v=1697848735&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=2100&amp;v=1697848735&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=2260&amp;v=1697848735&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=2450&amp;v=1697848735&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=2700&amp;v=1697848735&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=3000&amp;v=1697848735&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?crop=center&amp;height=3350&amp;v=1697848735&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/1b29d0287029781d1bd24e019c5c776d9cf44a6c-900x900.webp?v=1697848735&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="500"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/necklaces" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Necklaces
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=3600&amp;v=1697848735&amp;width=3600" width="3600" height="3600" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=180&amp;v=1697848735&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=360&amp;v=1697848735&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=540&amp;v=1697848735&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=720&amp;v=1697848735&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=900&amp;v=1697848735&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=1080&amp;v=1697848735&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=1296&amp;v=1697848735&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=1512&amp;v=1697848735&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=1728&amp;v=1697848735&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=1950&amp;v=1697848735&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=2100&amp;v=1697848735&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=2260&amp;v=1697848735&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=2450&amp;v=1697848735&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=2700&amp;v=1697848735&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=3000&amp;v=1697848735&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?crop=center&amp;height=3350&amp;v=1697848735&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/20e1dc8c1957715e8a89271348b76c270d23fdd4-900x900.webp?v=1697848735&amp;width=3600 3600w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="sliderule__wrapper">
+                        <button class="sliderow" type="button"
+                                data-animates="0"
+                                data-animation="drawer-items-fade"
+                                data-animation-delay="300"
+                                data-animation-duration="500"
+                                data-sliderule-open="sliderule-d25967db9c4ee6789c1bdd43dc6d45cc">
+                            <span class="sliderow__title">
+                                GIFTS
+                                <span class="sliderule__chevron--right">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-right" viewBox="0 0 24 24"><path d="M6 12h12.5m0 0-6-6m6 6-6 6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Show menu</span>
+                                </span>
+                            </span>
+                        </button>
+
+                        <div class="mobile__menu__dropdown sliderule__panel"
+                             id="sliderule-d25967db9c4ee6789c1bdd43dc6d45cc"
+                             data-sliderule="1"
+                             data-scroll-lock-scrollable>
+                            <div class="sliderow sliderow--back"
+                                 data-animates="1"
+                                 data-animation="drawer-items-fade"
+                                 data-animation-delay="50"
+                                 data-animation-duration="500">
+                                <button class="sliderow__back-button" type="button" data-sliderule-close="sliderule-d25967db9c4ee6789c1bdd43dc6d45cc">
+                                    <span class="sliderule__chevron--left">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-left" viewBox="0 0 24 24"><path d="M18.5 12H6m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Exit menu</span>
+                                    </span>
+                                </button>
+                                <a class="sliderow__title" href="/collections/gifts">GIFTS</a>
+                            </div>
+                            <div class="sliderow__links" data-links>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="250"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/anniversary-gifts">Anniversary Gifts</a>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="300"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/under-3-000">Under $3,000</a>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="350"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/under-5-000">Under $5,000</a>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="400"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/under-10-000">Under $10,000</a>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="450"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/get-personal">Personalized Moments</a>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <div class="sliderow"
+                                         role="button"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="500"
+                                         data-animation-duration="500">
+                                        <a class="sliderow__title" href="/collections/gift-cards">Gift Cards</a>
+                                    </div>
+                                </div>
+
+                                <div class="sliderule-grid blocks-3">
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="550"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/anniversary-gifts" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Anniversary
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=2000&amp;v=1704153338&amp;width=2000" width="2000" height="2000" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=180&amp;v=1704153338&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=360&amp;v=1704153338&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=540&amp;v=1704153338&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=720&amp;v=1704153338&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=900&amp;v=1704153338&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=1080&amp;v=1704153338&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=1296&amp;v=1704153338&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=1512&amp;v=1704153338&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=1728&amp;v=1704153338&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?crop=center&amp;height=1950&amp;v=1704153338&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/anniversary_copy.jpg?v=1704153338&amp;width=2000 2000w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="600"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/little-luxuries" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Little Luxuries
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=3993&amp;v=1704153033&amp;width=3993" width="3993" height="3993" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=180&amp;v=1704153033&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=360&amp;v=1704153033&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=540&amp;v=1704153033&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=720&amp;v=1704153033&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=900&amp;v=1704153033&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=1080&amp;v=1704153033&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=1296&amp;v=1704153033&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=1512&amp;v=1704153033&amp;width=1512 1512w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=1728&amp;v=1704153033&amp;width=1728 1728w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=1950&amp;v=1704153033&amp;width=1950 1950w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=2100&amp;v=1704153033&amp;width=2100 2100w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=2260&amp;v=1704153033&amp;width=2260 2260w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=2450&amp;v=1704153033&amp;width=2450 2450w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=2700&amp;v=1704153033&amp;width=2700 2700w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=3000&amp;v=1704153033&amp;width=3000 3000w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=3350&amp;v=1704153033&amp;width=3350 3350w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?crop=center&amp;height=3750&amp;v=1704153033&amp;width=3750 3750w, //jemmawynne.com/cdn/shop/files/Under_3.jpg?v=1704153033&amp;width=3993 3993w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="650"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/get-personal" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Get Personal
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 1;--aspect-ratio-mobile: 1;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=1333&amp;v=1704152084&amp;width=1333" width="1333" height="1333" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=180&amp;v=1704152084&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=360&amp;v=1704152084&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=540&amp;v=1704152084&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=720&amp;v=1704152084&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=900&amp;v=1704152084&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=1080&amp;v=1704152084&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/personal.jpg?crop=center&amp;height=1296&amp;v=1704152084&amp;width=1296 1296w, //jemmawynne.com/cdn/shop/files/personal.jpg?v=1704152084&amp;width=1333 1333w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="sliderule__wrapper">
+                        <button class="sliderow" type="button"
+                                data-animates="0"
+                                data-animation="drawer-items-fade"
+                                data-animation-delay="350"
+                                data-animation-duration="500"
+                                data-sliderule-open="sliderule-4fd1c35bf2a9ba91929bcac2b374d711">
+                            <span class="sliderow__title">
+                                COLLECTIONS
+                                <span class="sliderule__chevron--right">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-right" viewBox="0 0 24 24"><path d="M6 12h12.5m0 0-6-6m6 6-6 6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Show menu</span>
+                                </span>
+                            </span>
+                        </button>
+
+                        <div class="mobile__menu__dropdown sliderule__panel"
+                             id="sliderule-4fd1c35bf2a9ba91929bcac2b374d711"
+                             data-sliderule="1"
+                             data-scroll-lock-scrollable>
+                            <div class="sliderow sliderow--back"
+                                 data-animates="1"
+                                 data-animation="drawer-items-fade"
+                                 data-animation-delay="50"
+                                 data-animation-duration="500">
+                                <button class="sliderow__back-button" type="button" data-sliderule-close="sliderule-4fd1c35bf2a9ba91929bcac2b374d711">
+                                    <span class="sliderule__chevron--left">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-left" viewBox="0 0 24 24"><path d="M18.5 12H6m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Exit menu</span>
+                                    </span>
+                                </button>
+                                <a class="sliderow__title" href="/">COLLECTIONS</a>
+                            </div>
+                            <div class="sliderow__links" data-links>
+                                <div class="sliderule__wrapper">
+                                    <button class="sliderow" type="button"
+                                            data-animates="1"
+                                            data-animation="drawer-items-fade"
+                                            data-animation-delay="250"
+                                            data-animation-duration="500"
+                                            data-sliderule-open="sliderule-a1b50222ec909b10202826b33bc27e47">
+                                        <span class="sliderow__title">
+                                            ALL COLLECTIONS
+                                            <span class="sliderule__chevron--right">
+                                                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-right" viewBox="0 0 24 24"><path d="M6 12h12.5m0 0-6-6m6 6-6 6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Show menu</span>
+                                            </span>
+                                        </span>
+                                    </button>
+
+                                    <div class="mobile__menu__dropdown sliderule__panel"
+                                         id="sliderule-a1b50222ec909b10202826b33bc27e47"
+                                         data-sliderule="2"
+                                         data-scroll-lock-scrollable>
+                                        <div class="sliderow sliderow--back"
+                                             data-animates="2"
+                                             data-animation="drawer-items-fade"
+                                             data-animation-delay="50"
+                                             data-animation-duration="500">
+                                            <button class="sliderow__back-button" type="button" data-sliderule-close="sliderule-a1b50222ec909b10202826b33bc27e47">
+                                                <span class="sliderule__chevron--left">
+                                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-left" viewBox="0 0 24 24"><path d="M18.5 12H6m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Exit menu</span>
+                                                </span>
+                                            </button>
+                                            <a class="sliderow__title" href="/collections">ALL COLLECTIONS</a>
+                                        </div>
+                                        <div class="sliderow__links" data-links>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="250"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/anniversary">Anniversary</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="300"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/connexion">Connexion</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="350"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/escalator">Escalator</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="400"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/forget-me-not">Forget Me Not</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="450"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/forme">Forme</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="500"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/love-notes">Love Notes</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="550"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/modern-deco">Modern Deco</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="600"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/prive">Prive</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="650"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/prive-luxe">Prive Luxe</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="700"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/prive-pearls">Prive Pearl</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="750"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/toujours">Toujours</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="800"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/zodiac">Zodiac</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sliderule__wrapper">
+                                    <button class="sliderow" type="button"
+                                            data-animates="1"
+                                            data-animation="drawer-items-fade"
+                                            data-animation-delay="300"
+                                            data-animation-duration="500"
+                                            data-sliderule-open="sliderule-c11765a4a41a3670f2a9e0cc7d1872be">
+                                        <span class="sliderow__title">
+                                            Featured
+                                            <span class="sliderule__chevron--right">
+                                                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-right" viewBox="0 0 24 24"><path d="M6 12h12.5m0 0-6-6m6 6-6 6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Show menu</span>
+                                            </span>
+                                        </span>
+                                    </button>
+
+                                    <div class="mobile__menu__dropdown sliderule__panel"
+                                         id="sliderule-c11765a4a41a3670f2a9e0cc7d1872be"
+                                         data-sliderule="2"
+                                         data-scroll-lock-scrollable>
+                                        <div class="sliderow sliderow--back"
+                                             data-animates="2"
+                                             data-animation="drawer-items-fade"
+                                             data-animation-delay="50"
+                                             data-animation-duration="500">
+                                            <button class="sliderow__back-button" type="button" data-sliderule-close="sliderule-c11765a4a41a3670f2a9e0cc7d1872be">
+                                                <span class="sliderule__chevron--left">
+                                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow-left" viewBox="0 0 24 24"><path d="M18.5 12H6m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" /></svg><span class="visually-hidden">Exit menu</span>
+                                                </span>
+                                            </button>
+                                            <a class="sliderow__title" href="/">Featured</a>
+                                        </div>
+                                        <div class="sliderow__links" data-links>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="250"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/new">New Arrivals</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="300"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/bridal">Bridal</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="350"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/personalized">Personalized</a>
+                                                </div>
+                                            </div>
+                                            <div class="sliderule__wrapper">
+                                                <div class="sliderow"
+                                                     role="button"
+                                                     data-animates="2"
+                                                     data-animation="drawer-items-fade"
+                                                     data-animation-delay="400"
+                                                     data-animation-duration="500">
+                                                    <a class="sliderow__title" href="/collections/jw-x-muzo">JW x Muzo</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sliderule-grid blocks-1">
+
+
+
+                                    <div class="menu__block menu__block--wide"
+                                         data-animates="1"
+                                         data-animation="drawer-items-fade"
+                                         data-animation-delay="350"
+                                         data-animation-duration="500">
+                                        <div class="header__dropdown__image palette--contrast--dark"
+                                             data-stagger-first>
+                                            <a href="/collections/forme" class="link-over-image">
+                                                <div class="hero__content__wrapper align--bottom-left">
+                                                    <div class="hero__content hero__content--transparent backdrop--radial">
+                                                        <p class="hero__description">
+                                                            Forme
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a><div class="image-overlay" style="--overlay-bg: #000000; --overlay-opacity: 0.0;"></div><figure class="image-wrapper lazy-image lazy-image--backfill is-loading" style="--aspect-ratio: 2.0;--aspect-ratio-mobile: 2.0;">
+                                                <img src="//jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=2160&amp;v=1732211790&amp;width=1080" width="1080" height="2160" loading="lazy" srcset="//jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=90&amp;v=1732211790&amp;width=180 180w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=180&amp;v=1732211790&amp;width=360 360w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=270&amp;v=1732211790&amp;width=540 540w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=360&amp;v=1732211790&amp;width=720 720w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=450&amp;v=1732211790&amp;width=900 900w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?crop=center&amp;height=540&amp;v=1732211790&amp;width=1080 1080w, //jemmawynne.com/cdn/shop/files/Forme_banner_e6d5d572-cc34-4457-a13c-ea8616a15656.jpg?v=1732211790&amp;width=1080 1080w" sizes="(min-width: 380px) 350px, calc(100vw - 30px)" class=" fit-cover is-loading ">
+                                            </figure>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="sliderule__wrapper">
+                        <div class="sliderow"
+                             role="button"
+                             data-animates="0"
+                             data-animation="drawer-items-fade"
+                             data-animation-delay="400"
+                             data-animation-duration="500">
+                            <a class="sliderow__title" href="/pages/bespoke">BESPOKE</a>
+                        </div>
+                    </div><div class="sliderule__wrapper">
+                        <div class="sliderow"
+                             role="button"
+                             data-animates="0"
+                             data-animation="drawer-items-fade"
+                             data-animation-delay="450"
+                             data-animation-duration="500">
+                            <a class="sliderow__title" href="/pages/about-us">About</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="drawer__underlay" data-drawer-underlay></span>
+</nav>

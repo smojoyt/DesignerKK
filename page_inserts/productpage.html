@@ -1,0 +1,152 @@
+<div id="loader" class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="w-10 h-10 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+</div>
+
+<div id="pageContent" class="hidden bg-[#ffeddf]">
+    <div class="max-w-7xl mx-auto px-4 pt-24 md:pt-40 pb-10">
+        
+        <div class="flex flex-col md:flex-row gap-0 md:gap-36">
+            <div class="flex-1">
+                <img id="mainImage" src="" alt="Product Image" class="w-full rounded-xl border transition-opacity duration-300 opacity-100" />
+                <div class="relative mt-4">
+                    
+                    <div class="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-[#ffeddf] z-10 pointer-events-none"></div>
+                    <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-[#ffeddf] z-10 pointer-events-none"></div>
+
+                    <div class="mx-auto w-full max-w-[900px]">
+                        <div id="thumbnailContainer"
+                             class="carousel thumbnail p-2 rounded-lg overflow-hidden">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div class="flex-1">
+                <h1 id="product-name" class="text-3xl md:text-4xl font-extrabold uppercase">Loading...</h1>
+                <div class="text-sm text-gray-600">Product ID: <span id="product-id"></span></div>
+                <p class="italic text-2xl font-semibold mb-4 pt-3"><span id="price-section">0.00</span></p>
+
+
+                <div class="mt-4">
+                    <label class="text-lg uppercase font-extrabold block text-gray-600 mb-2 uppercase tracking-wider pt-2">
+                        Choose a Color
+                    </label>
+
+                    <div id="variant-select" class="flex flex-wrap gap-4 mt-2"></div>
+                    <input type="hidden" id="variantSelector" name="variantSelector" />
+                </div>
+
+
+
+                <button id="add-to-cart-btn" class="w-full font-bold bg-yellow-200 text-black tracking-widest py-3 px-4 rounded hover:bg-yellow-300 transition mt-6 text-center uppercase">
+                    Add to Cart
+                </button>
+                <!-- Removed because it doesnt work with items on sale. Have to fix each indivudual product. Reccomended to move the js to a helper js and fix it there.
+    <button id="buyButton" class="w-full font-extrabold bg-[#f88379] text-black tracking-widest py-3 px-4 rounded hover:bg-[#ca5d53] transition mt-6 text-center uppercase">
+        Buy Now
+    </button>
+        -->
+
+                <h2 class="text-lg uppercase font-extrabold mt-6">Details</h2>
+                <div class="mt-2 mb-4 w-20 h-1 bg-[#f88379] rounded"></div>
+
+                <ul id="product-description" class="font-semibold mb-4 text-base list-disc list-inside"></ul>
+                <!-- Expandable Sections -->
+                <!-- Sizing Section -->
+                <div id="sizingSection" class="mt-10 hidden">
+                    <button type="button"
+                            class="toggle-expand group w-full text-left flex justify-between items-center font-extrabold text-lg uppercase focus:outline-none">
+                        <div>
+                            <span>Sizing</span>
+                            <div class="mt-2 w-20 h-1 bg-[#f88379] rounded transition-all duration-500 ease-in-out scale-x-0 origin-left group-hover:scale-x-100"></div>
+                        </div>
+                        <svg class="expand-icon w-5 h-5 transition-transform transform rotate-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div class="expand-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul id="product-sizing" class="font-semibold text-base list-disc list-inside"></ul>
+                    </div>
+                </div>
+
+
+
+                <!-- Key Details -->
+                <div id="keyDetailsSection" class="mt-2 hidden">
+                    <button type="button"
+                            class="toggle-expand group w-full text-left flex justify-between items-center font-extrabold text-lg uppercase focus:outline-none">
+                        <div>
+                            <span>Key Benefits</span>
+                            <div class="mt-2 w-20 h-1 bg-[#f88379] rounded transition-all duration-500 ease-in-out scale-x-0 origin-left group-hover:scale-x-100"></div>
+                        </div>
+                        <svg class="expand-icon w-5 h-5 transition-transform transform rotate-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+
+
+                    <div class="expand-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul id="product-keyDetails" class="font-semibold text-base list-disc list-inside"></ul>
+                    </div>
+
+                </div>
+
+
+                <!-- Care Instructions -->
+                <div id="careInstructionsSection" class="mt-2 hidden">
+                    <button type="button"
+                            class="toggle-expand group w-full text-left flex justify-between items-center font-extrabold text-lg uppercase focus:outline-none">
+                        <div>
+                            <span>Care Instructions</span>
+                            <div class="mt-2 w-20 h-1 bg-[#f88379] rounded transition-all duration-500 ease-in-out scale-x-0 origin-left group-hover:scale-x-100"></div>
+                        </div>
+                        <svg class="expand-icon w-5 h-5 transition-transform transform rotate-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div class="expand-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <ul id="product-careInstructions" class="font-semibold text-base list-disc list-inside"></ul>
+                    </div>
+                </div>
+
+
+                <!-- Shipping & Returns (always visible) -->
+                <div class="mt-2">
+                    <button type="button"
+                            class="toggle-expand group w-full text-left flex justify-between items-center font-extrabold text-lg uppercase focus:outline-none">
+                        <div>
+                            <span>Shipping & Returns</span>
+                            <div class="mt-2 w-20 h-1 bg-[#f88379] rounded transition-all duration-500 ease-in-out scale-x-0 origin-left group-hover:scale-x-100"></div>
+                        </div>
+                        <svg class="expand-icon w-5 h-5 transition-transform transform rotate-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div class="expand-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out font-bold text-base text-gray-700 leading-relaxed">
+                        <p>
+                            Final sale on discounted items. For a full refund, request a return within 24 hours of delivery. Items must be in original condition and packaging. Need help? Email us at
+                            <a href="mailto:contact@karrykraze.com" class="underline text-blue-600">contact@karrykraze.com</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

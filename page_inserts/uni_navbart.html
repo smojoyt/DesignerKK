@@ -1,0 +1,137 @@
+﻿<!-- Announcement Bar -->
+<div class="tracking-widest font-bold text-gray-900 shadow-md uppercase fixed bottom-0 w-full bg-yellow-100 text-center text-sm text-gray-800 py-2 px-4 z-50">
+    Enjoy Free Shipping Sitewide With Order of $50 Or More
+</div>
+
+<!-- Navbar -->
+<nav id="mainNavbar" class="navbar-show bg-transparent text-white fixed top-0 w-full z-50 transition-all duration-300 ease-in-out">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- Left: Hamburger (mobile only) -->
+            <div class="w-12 flex items-center md:hidden">
+                <button id="mobile-menu-button" class="text-white text-2xl focus:outline-none">
+                    ☰
+                </button>
+            </div>
+
+            <!-- Center: Logo -->
+            <div class="flex justify-center flex-grow overflow-hidden">
+                <a href="/" class="flex items-center">
+                    <img id="logo" src="/imgs/Logo/Long/LL_0304.png" alt="Karry Kraze Logo" class="md:h-12 h-auto w-auto mx-auto transition-opacity duration-300" />
+                </a>
+            </div>
+
+            <!-- Right: Custom Mail + Cart Icons -->
+            <div class="flex items-center gap-4">
+
+                <!-- Mail Icon Button -->
+                <!-- Mail Icon Button -->
+                <a href="mailto:info@karrykraze.com" id="mail-icon" class="text-white hover:text-gray-300" title="Contact Us">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6 h-6" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4V4zm0 0l8 8 8-8" />
+                    </svg>
+                </a>
+
+
+                <!-- Cart Icon Button -->
+                <button onclick="toggleCart()" class="relative">
+                    <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6 text-current" stroke="currentColor" stroke-width="2">
+                        <path d="M2.5,3.5 L4.57364,3.5 C4.81929,3.5 5.02855,3.67844 5.06736,3.921 L6.73058,14.3158 C6.88582,15.286 7.72287,15.9998 8.70546,15.9998 L17.3957,15.9998 C18.3331,15.9998 19.1447,15.3487 19.3481,14.4337 L20.7296,8.21674 C20.8684,7.59222 20.3932,6.9998 19.7534,6.9998 L5.83997,6.9998" stroke-linecap="round"></path>
+                        <circle cx="9.5" cy="21" r="1" stroke-linecap="round"></circle>
+                        <circle cx="16.5" cy="21" r="1" stroke-linecap="round"></circle>
+                    </svg>
+                    <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-black text-white text-xs rounded-full px-1">0</span>
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex justify-center space-x-6 items-center py-2">
+            <a href="/products/catalog.html" class="nav-link font-semibold text-lg ">Shop All</a>
+            <a href="/products/catalog.html?category=headwear" class="nav-link font-semibold text-lg ">Hats</a>
+            <a href="/products/catalog.html?category=bags" class="nav-link font-semibold text-lg ">Bags</a>
+            <a href="/products/catalog.html?category=charms" class="nav-link font-semibold text-lg ">Charms</a>
+            <a href="https://www.instagram.com/karrykraze/" target="_blank" class="nav-link font-semibold text-lg  ">Instagram</a>
+        </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden flex flex-col gap-2 px-4 pb-4 pt-2 bg-white shadow-md z-40 w-full">
+        <a href="/products/catalog.html" class="text-gray-600 hover:text-black ">Shop All</a>
+        <a href="/products/catalog.html?category=headwear" class="text-gray-600 hover:text-black ">Hats</a>
+        <a href="/products/catalog.html?category=bags" class="text-gray-600 hover:text-black ">Bags</a>
+        <a href="/products/catalog.html?category=charms" class="text-gray-600 hover:text-black ">Charms</a>
+        <a href="https://www.instagram.com/karrykraze/" target="_blank" class="text-gray-600 hover:text-black">Instagram</a>
+        <a href="https://karrykraze.com/pages/contact.html" class="text-gray-600 hover:text-black">Contact</a>
+    </div>
+</nav>
+<!-- Cart Overlay and Side Drawer -->
+<div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleCart(false)"></div>
+
+<div id="sideCart" class="no-transition fixed right-0 top-0 w-80 max-w-full h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="flex items-center justify-between p-4 border-b">
+        <h2 class="text-xl font-bold">Your Cart</h2>
+        <button onclick="toggleCart(false)" class="text-gray-500 hover:text-black text-2xl">&times;</button>
+    </div>
+    <p id="emptyCartMessage" class="text-center text-sm text-gray-500 mt-4 hidden">
+        Your cart is empty.
+    </p>
+    <div id="cartItems" class="p-4 space-y-4 overflow-y-auto max-h-[calc(100%-220px)]"></div>
+    <div class="p-4 border-t">
+        <div class="flex justify-between font-bold text-lg mb-1">
+            <span>Total:</span>
+            <span id="cartTotal">$0.00</span>
+        </div>
+
+        <div id="freeShippingBar" class="mb-3 text-sm text-gray-700">
+            <!-- Will be filled by JS -->
+        </div>
+
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-3">
+            <div id="freeShippingProgress" class="bg-green-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%;"></div>
+        </div>
+        <!-- $10 OFF PROGRESS BAR 
+        <div id="discountBar" class="mb-3 text-sm text-gray-700 hidden"></div>
+        <div id="discountBarWrapper" class="w-full bg-gray-200 rounded-full h-2.5 mb-3 hidden">
+            <div id="discountProgress" class="bg-purple-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%;"></div>
+        </div>  -->
+
+        <button id="checkoutBtn" class="w-full bg-black text-white py-2 rounded hover:bg-gray-800">Checkout</button>
+        <p class="text-xs text-gray-500 text-center mt-2">
+            Shipping and taxes calculated at checkout.
+        </p>
+
+    </div>
+
+</div>
+
+<style>
+
+    body.dimmed-background {
+        overflow: hidden; /* Optional: disables scroll behind cart */
+    }
+
+    .blurred {
+        opacity: 0.3; /* Avoid transform, blur, or filter */
+    }
+
+    .navbar-hide {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-show {
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-link {
+        transition: color 0.3s ease;
+    }
+</style>
+
