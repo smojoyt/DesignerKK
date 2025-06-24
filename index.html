@@ -192,6 +192,7 @@
         const closeBtn = document.getElementById("close-filters");
         const catalogMain = document.getElementById("catalog-main");
 
+        let globalProducts = {};
         let sidebarOpen = false;
         let filters = {};
         let iso; // ✅ Isotope instance (declared globally)
@@ -279,6 +280,7 @@
             ]).then(([products, promotionsFile]) => {
                 const promotions = promotionsFile.promotions || [];
                 const updatedProducts = applyPromotionsToProducts(products, promotions);
+                globalProducts = updatedProducts;
 
                 // 🌟 Dynamic Banner from URL category
                 const selectedCategory = urlParams.get("category");
@@ -331,7 +333,8 @@
                             return;
                         }
 
-                        openProductModal(product);
+                        openProductModal(product, key);
+
                     });
 
 
@@ -442,7 +445,7 @@
             });
         }
 
-        function openProductModal(product) {
+        function openProductModal(product, productKey) {
             const modal = document.getElementById("product-modal");
             const modalName = document.getElementById("modal-product-name");
             const modalPrice = document.getElementById("modal-product-price");
@@ -451,6 +454,7 @@
             const purchaseBtn = document.getElementById("modal-purchase-btn");
 
             modalName.textContent = product.name;
+            modal.dataset.key = productKey;
             modalPrice.textContent = `$${Number(product.price).toFixed(2)}`;
             modalImageMain.style.backgroundImage = `url(${product.thumbnails?.[0] || product.image})`;
 
@@ -469,17 +473,25 @@
 
             // Optional: Handle Purchase
             purchaseBtn.onclick = () => {
-                const catalogKey = product.key || product.product_id;
-                const checkoutKey = product.checkout_sku || catalogKey;
+                const productKey = modal.dataset.key; // assuming you stored the productKey when opening the modal
+                const product = globalProducts[productKey];
 
-                const variant = product.defaultVariant || "Black";
-                const qty = 1;
 
-                const encoded = encodeURIComponent(`${checkoutKey}-${variant}:${qty}`);
-                const url = `https://buy.karrykraze.com/checkout/index.html?products=${encoded}&cart_origin=overlay`;
+                if (!product) {
+                    console.error("❌ Product not found:", productKey);
+                    return;
+                }
 
-                window.location.href = url;
+                const checkoutSku = product.checkout_product_id || product.product_id; // Use dummy if present
+                const variant = product.custom1Options?.split("|")[0] || "Default"; // Replace with selected variant if available
+                const quantity = 1;
+
+                const encoded = encodeURIComponent(`${checkoutSku}-${variant}:${quantity}`);
+                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encoded}&cart_origin=overlay`;
+
+                window.location.href = checkoutUrl;
             };
+
 
 
 
