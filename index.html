@@ -258,10 +258,12 @@
 
                 // 🧩 Render product cards
                 Object.entries(updatedProducts).forEach(([_, p]) => {
-                    if (p.tags?.includes("Discontinued")) return;
+                    if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return; // ✅ Only include items tagged with designerbags
                     const html = renderCatalogCard(p);
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
+
 
                 imagesLoaded(container, () => {
                     iso = new Isotope(container, {
