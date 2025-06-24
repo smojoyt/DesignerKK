@@ -288,6 +288,7 @@
 
                 // 🧩 Render product cards
                 Object.entries(updatedProducts).forEach(([key, p]) => {
+                    if (key.includes("_Dummy")) return; // 👈 skip dummy entries
                     if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
                     const html = renderCatalogCard(p, key); // 🔁 pass key here
                     container.insertAdjacentHTML("beforeend", html);
@@ -468,16 +469,18 @@
 
             // Optional: Handle Purchase
             purchaseBtn.onclick = () => {
-                const sku = product.product_id_dummy; // e.g. "KK-1010"
-                const productKey = product.key || sku; // optional fallback if you store the real product key
-                const variant = product.defaultVariant || "Default"; // or use selected variant if applicable
+                const catalogKey = product.key || product.product_id;
+                const checkoutKey = product.checkout_sku || catalogKey;
+
+                const variant = product.defaultVariant || "Black";
                 const qty = 1;
 
-                const encodedProductString = encodeURIComponent(`${productKey}-${variant}:${qty}`);
-                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodedProductString}&cart_origin=overlay`;
+                const encoded = encodeURIComponent(`${checkoutKey}-${variant}:${qty}`);
+                const url = `https://buy.karrykraze.com/checkout/index.html?products=${encoded}&cart_origin=overlay`;
 
-                window.location.href = checkoutUrl;
+                window.location.href = url;
             };
+
 
 
             modal.classList.remove("hidden");
