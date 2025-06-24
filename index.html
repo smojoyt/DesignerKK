@@ -244,8 +244,8 @@
             const urlParams = new URLSearchParams(window.location.search); // ✅ moved to top
 
             Promise.all([
-                fetch("/products/products.json").then(res => res.json()),
-                fetch("/products/promotion.json").then(res => res.json())
+                fetch("https://karrykraze.com//products/products.json").then(res => res.json()),
+                fetch("https://karrykraze.com//products/promotion.json").then(res => res.json())
             ]).then(([products, promotionsFile]) => {
                 const promotions = promotionsFile.promotions || [];
                 const updatedProducts = applyPromotionsToProducts(products, promotions);
