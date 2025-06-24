@@ -468,8 +468,17 @@
 
             // Optional: Handle Purchase
             purchaseBtn.onclick = () => {
-                window.location.href = product.url || "#"; // or open Stripe Checkout
+                const sku = product.product_id_dummy; // e.g. "KK-1010"
+                const productKey = product.key || sku; // optional fallback if you store the real product key
+                const variant = product.defaultVariant || "Default"; // or use selected variant if applicable
+                const qty = 1;
+
+                const encodedProductString = encodeURIComponent(`${productKey}-${variant}:${qty}`);
+                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodedProductString}&cart_origin=overlay`;
+
+                window.location.href = checkoutUrl;
             };
+
 
             modal.classList.remove("hidden");
         }
