@@ -151,6 +151,36 @@
         </main>
     </div>
 
+
+
+
+    <!-- Product Modal Overlay -->
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-[90%] max-w-5xl flex flex-col md:flex-row overflow-hidden relative">
+            <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl">&times;</button>
+
+            <!-- Left: Image Gallery -->
+            <div class="w-full md:w-1/2 bg-gray-100 p-4">
+                <div id="modal-image-main" class="w-full aspect-square bg-center bg-cover rounded mb-2"></div>
+                <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto"></div>
+            </div>
+
+            <!-- Right: Product Info -->
+            <div class="w-full md:w-1/2 p-4 flex flex-col justify-between">
+                <div>
+                    <h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
+                    <p id="modal-product-price" class="text-xl text-gray-700 mb-4"></p>
+                </div>
+                <button id="modal-purchase-btn" class="bg-black text-white px-6 py-3 rounded text-lg hover:bg-gray-800">
+                    Purchase
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <!-- Footer -->
     <div id="footer"></div>
     <div id="navbar-container"></div>
@@ -279,6 +309,19 @@
                         }
                     });
 
+                    // ✅ Add the event listener here:
+                    container.addEventListener("click", (e) => {
+                        const card = e.target.closest(".item");
+                        if (!card) return;
+
+                        const productKey = card.dataset.key;
+                        const product = updatedProducts[productKey];
+                        if (!product) return;
+
+                        openProductModal(product);
+                    });
+
+
                     // ✅ Apply URL-based filters on load (supports multiple values per group)
                     const preselectedFilters = [];
 
@@ -341,6 +384,8 @@
 
                         closeSidebar();
                     });
+
+
                 });
             });
         });
@@ -383,6 +428,39 @@
             });
         }
 
+        function openProductModal(product) {
+            const modal = document.getElementById("product-modal");
+            const modalName = document.getElementById("modal-product-name");
+            const modalPrice = document.getElementById("modal-product-price");
+            const modalImageMain = document.getElementById("modal-image-main");
+            const modalThumbnails = document.getElementById("modal-thumbnails");
+            const purchaseBtn = document.getElementById("modal-purchase-btn");
+
+            modalName.textContent = product.name;
+            modalPrice.textContent = `$${Number(product.price).toFixed(2)}`;
+            modalImageMain.style.backgroundImage = `url(${product.thumbnails?.[0] || product.image})`;
+
+            // Clear thumbnails
+            modalThumbnails.innerHTML = "";
+
+            (product.thumbnails || [product.image]).forEach((thumb, i) => {
+                const img = document.createElement("img");
+                img.src = thumb;
+                img.className = "w-16 h-16 object-cover rounded cursor-pointer border";
+                img.addEventListener("click", () => {
+                    modalImageMain.style.backgroundImage = `url(${thumb})`;
+                });
+                modalThumbnails.appendChild(img);
+            });
+
+            // Optional: Handle Purchase
+            purchaseBtn.onclick = () => {
+                window.location.href = product.url || "#"; // or open Stripe Checkout
+            };
+
+            modal.classList.remove("hidden");
+        }
+
 
         // 🔁 Main Load Flow
         includeHTML("navbar-container", "/page_inserts/uni_navbar.html", () => {
@@ -397,6 +475,9 @@
             }
 
             includeHTML("footer", "/page_inserts/footer.html");
+        });
+        document.getElementById("modal-close").addEventListener("click", () => {
+            document.getElementById("product-modal").classList.add("hidden");
         });
 
     </script>
