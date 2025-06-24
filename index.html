@@ -289,9 +289,10 @@
                 // 🧩 Render product cards
                 Object.entries(updatedProducts).forEach(([key, p]) => {
                     if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
-                    const html = renderCatalogCard(p, key);
+                    const html = renderCatalogCard(p, key); // 🔁 pass key here
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
 
 
 

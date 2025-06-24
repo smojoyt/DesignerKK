@@ -111,7 +111,7 @@ window.getFullPriceHTML = function (product) {
 };
 
 
-function renderCatalogCard(p) {
+function renderCatalogCard(p, key) {
     const tagClasses = [
         ...(p.tags ? p.tags.map(t => t.toLowerCase()) : []),
         ...(p.tags?.includes("Outofstock") ? [] : ["instock"])
@@ -120,7 +120,7 @@ function renderCatalogCard(p) {
     const hasVariants = p.custom1Options && p.custom1Options.split("|").length > 1;
     const regular = p.price;
     const sale = p.sale_price ?? regular;
-    const isOnSale = sale < regular; // ✅ Fixed this
+    const isOnSale = sale < regular;
 
     const priceBlock = isOnSale
         ? `<div class="mt-2">
@@ -143,11 +143,10 @@ function renderCatalogCard(p) {
 
     return `
     <div class="p-2 item cursor-pointer ${p.category} ${tagClasses} ${isOnSale ? "on-sale" : ""}"  
-     data-key="${p.product_id}" 
+     data-key="${key}" 
      data-name="${p.name.toLowerCase()}" 
      data-price="${sale}" 
      data-discount="${isOnSale ? Math.round(((regular - sale) / regular) * 100) : 0}">
-
 
         <div class="block transition overflow-hidden">
             <div class="relative flex items-center justify-center">
@@ -163,9 +162,10 @@ function renderCatalogCard(p) {
                 ${priceBlock}
                 <div class="flex flex-wrap gap-1 mt-2">${tagBadges}</div>
             </div>
-        </a>
+        </div>
     </div>`;
 }
+
 
 async function loadAllReviews() {
     const url = "https://drive.google.com/uc?export=download&id=1gXl4MX0sQboICfNePWtcY27Ktwnu5jbS";
