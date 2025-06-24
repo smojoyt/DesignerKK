@@ -312,15 +312,26 @@
 
                     // ✅ Add the event listener here:
                     container.addEventListener("click", (e) => {
-                        const card = e.target.closest(".item");
-                        if (!card) return;
+                        console.log("🟡 Click detected in container");
 
-                        const productKey = card.dataset.key;
-                        const product = updatedProducts[productKey];
-                        if (!product) return;
+                        const card = e.target.closest(".item");
+                        if (!card) {
+                            console.log("❌ No item found on click target");
+                            return;
+                        }
+
+                        const key = card.dataset.key;
+                        console.log("✅ Card clicked, data-key:", key);
+
+                        const product = updatedProducts[key];
+                        if (!product) {
+                            console.log("❌ No product found for key:", key);
+                            return;
+                        }
 
                         openProductModal(product);
                     });
+
 
 
                     // ✅ Apply URL-based filters on load (supports multiple values per group)
@@ -477,9 +488,12 @@
 
             includeHTML("footer", "/page_inserts/footer.html");
         });
-        document.getElementById("modal-close").addEventListener("click", () => {
-            document.getElementById("product-modal").classList.add("hidden");
+        document.getElementById("product-modal").addEventListener("click", (e) => {
+            if (e.target.id === "product-modal") {
+                document.getElementById("product-modal").classList.add("hidden");
+            }
         });
+
 
     </script>
 
