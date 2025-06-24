@@ -471,26 +471,32 @@
                 modalThumbnails.appendChild(img);
             });
 
-            // Optional: Handle Purchase
             purchaseBtn.onclick = () => {
-                const productKey = modal.dataset.key; // assuming you stored the productKey when opening the modal
+                const productKey = modal.dataset.key;
                 const product = globalProducts[productKey];
-
 
                 if (!product) {
                     console.error("❌ Product not found:", productKey);
                     return;
                 }
 
-                const checkoutSku = product.checkout_product_id || product.product_id; // Use dummy if present
-                const variant = product.custom1Options?.split("|")[0] || "Default"; // Replace with selected variant if available
+                const checkoutId = product.checkout_product_id || productKey;
+                const variant = product.custom1Options?.split("|")[0] || "Default";
                 const quantity = 1;
 
-                const encoded = encodeURIComponent(`${checkoutSku}-${variant}:${quantity}`);
-                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encoded}&cart_origin=overlay`;
+                // Encode the full cart as JSON
+                const cartData = encodeURIComponent(JSON.stringify([
+                    {
+                        id: checkoutId,
+                        variant: variant,
+                        qty: quantity
+                    }
+                ]));
 
+                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?cart=${cartData}&cart_origin=overlay`;
                 window.location.href = checkoutUrl;
             };
+
 
 
 
