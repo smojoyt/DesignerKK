@@ -656,7 +656,10 @@
             </p>
         `;
                 } else {
-                    contentHTML = `<ul>${items.map(item => `<li class="font-semibold text-base leading-relaxed list-disc list-inside">${item}</li>`).join("")}</ul>`;
+                    contentHTML = `<ul>${items.map(item => `
+    <li class="font-extrabold text-base leading-relaxed list-disc list-inside">${item}</li>
+`).join("")}</ul>`;
+
                 }
 
                 return `
