@@ -72,7 +72,8 @@
         <img id="catalog-banner-image"
              class="w-full object-cover absolute inset-0 -z-10 hidden"
              src=""
-             alt="Category Banner" />
+             alt="Category Banner" 
+             loading="lazy"/>
 
         <!-- Centered Banner Text -->
         <div id="banner-text"
@@ -179,7 +180,7 @@
 
 
     <div id="product-modal" class="fixed inset-0 z-50 bg-black bg-opacity-70 hidden flex items-center justify-center px-2">
-        <div class="flex py-10 flex-col md:flex-row bg-white rounded-xl w-full max-w-5xl mx-auto max-h-[95vh] md:h-auto overflow-hidden relative">
+        <div class="flex p-2 md:py-10 flex-col md:flex-row bg-white rounded-xl w-full max-w-5xl mx-auto max-h-[95vh] md:h-auto overflow-hidden relative">
 
             <!-- Close Button -->
             <button id="modal-close"
@@ -191,7 +192,7 @@
             <div class="md:w-1/2 w-full relative flex flex-col">
                 <!-- Main Image -->
                 <div id="modal-image-main"
-                     class="my-3 m-auto md:m-5 w-4/6 md:w-auto aspect-square bg-cover bg-center rounded-xl md:rounded-xl"></div>
+                     class="my-3 m-auto md:m-5 w-3/6 md:w-auto aspect-square bg-cover bg-center rounded-xl md:rounded-xl"></div>
 
                 <!-- Thumbnails -->
                 <div id="modal-thumbnails"
@@ -657,7 +658,7 @@
         `;
                 } else {
                     contentHTML = `<ul>${items.map(item => `
-    <li class="font-extrabold text-base leading-relaxed list-disc list-inside">${item}</li>
+    <li class="font-semibold text-base leading-relaxed list-disc list-inside">${item}</li>
 `).join("")}</ul>`;
 
                 }
@@ -723,6 +724,16 @@
 
 
 
+        // Close modal when X is clicked
+        document.getElementById("modal-close").addEventListener("click", () => {
+            document.getElementById("product-modal").classList.add("hidden");
+        });
+
+        document.getElementById("product-modal").addEventListener("click", (e) => {
+            if (e.target.id === "product-modal") {
+                e.currentTarget.classList.add("hidden");
+            }
+        });
 
         // 🔁 Main Load Flow
         includeHTML("navbar-container", "/page_inserts/uni_navbart.html", () => {
