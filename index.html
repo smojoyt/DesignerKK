@@ -484,18 +484,13 @@
                 const variant = product.custom1Options?.split("|")[0] || "Default";
                 const quantity = 1;
 
-                // Encode the full cart as JSON
-                const cartData = encodeURIComponent(JSON.stringify([
-                    {
-                        id: checkoutId,
-                        variant: variant,
-                        qty: quantity
-                    }
-                ]));
+                // Convert to ?products= format
+                const productString = `${checkoutId}-${variant}:${quantity}`;
+                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodeURIComponent(productString)}&cart_origin=overlay`;
 
-                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?cart=${cartData}&cart_origin=overlay`;
                 window.location.href = checkoutUrl;
             };
+
 
 
 
