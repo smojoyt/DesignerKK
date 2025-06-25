@@ -58,12 +58,26 @@
     </style>
 </head>
 <body class="bg-[#ffeddf] text-gray-900">
-    <div class="relative w-full pt-16">
-        <img id="catalog-banner" src="" alt="Catalog Banner" class="w-full h-auto object-cover hidden">
-        <div id="banner-text" class="text-5xl md:text-[15rem] font-extrabold leading-tight text-white drop-shadow-lg absolute bottom-0 md:bottom-4 left-4 capitalize bg-opacity-60 px-0 md:px-4 py-0 md:py-2 rounded tracking-wide">
-            <!-- Category text will be inserted here -->
+    <div class="relative w-full pt-16 overflow-hidden h-[250px] md:h-[500px]">
+        <!-- Default banner video -->
+        <video id="catalog-banner-video" autoplay muted loop playsinline
+               class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://karrykraze.com/imgs/Banner/BagPreview_06.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Image banner (shown on category selection) -->
+        <img id="catalog-banner-image" src="" alt="Category Banner"
+             class="absolute inset-0 w-full h-full object-cover z-0 hidden" />
+
+        <!-- Banner text -->
+        <div id="banner-text"
+             class="absolute left-4 bottom-2 md:bottom-4 text-4xl md:text-[12rem] font-extrabold text-white drop-shadow-lg bg-black/40 px-2 md:px-6 py-1 md:py-4 rounded-lg capitalize tracking-wide z-10">
+            <span id="banner-text-content">All Products</span>
         </div>
     </div>
+
+
 
 
     <!-- Layout -->
@@ -202,13 +216,23 @@
         let iso; // ✅ Isotope instance (declared globally)
 
         function setBannerFromCategory(category, products) {
-            if (!category) return;
+            const bannerVideo = document.getElementById("catalog-banner-video");
+            const bannerImage = document.getElementById("catalog-banner-image");
+            const textEl = document.getElementById("banner-text-content");
 
             const categoryTextMap = {
                 lv: "Louis Vuitton",
                 tc: "Telfar",
                 chanel: "Chanel"
             };
+
+            if (!category) {
+                // No category: Show video, hide image, reset text
+                bannerVideo.classList.remove("hidden");
+                bannerImage.classList.add("hidden");
+                textEl.textContent = "All Products";
+                return;
+            }
 
             const matching = Object.values(products).filter(p =>
                 Array.isArray(p.category)
@@ -218,18 +242,22 @@
 
             if (matching.length > 0) {
                 const randomItem = matching[Math.floor(Math.random() * matching.length)];
-                const bannerEl = document.getElementById("catalog-banner");
-                const textEl = document.getElementById("banner-text");
 
-                if (bannerEl && textEl) {
-                    bannerEl.src = randomItem.banner;
-                    bannerEl.classList.remove("hidden");
+                if (randomItem.banner) {
+                    bannerImage.src = randomItem.banner;
+                    bannerImage.classList.remove("hidden");
+                    bannerVideo.classList.add("hidden");
 
                     textEl.textContent = categoryTextMap[category.toLowerCase()] || category;
-                    textEl.classList.remove("hidden");
                 }
+            } else {
+                // Fallback to default
+                bannerVideo.classList.remove("hidden");
+                bannerImage.classList.add("hidden");
+                textEl.textContent = "All Products";
             }
         }
+
 
 
         function isMobile() {
