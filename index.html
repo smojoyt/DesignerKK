@@ -633,32 +633,78 @@
             detailsContainer.innerHTML = ""; // Clear existing content
 
             // Helper function to build collapsible section
-            function createDropdownSection(title, items = []) {
+            function createDropdownSection(title, items = [], isOpen = false) {
                 if (!items || items.length === 0) return "";
 
                 const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
-                const listItems = items.map(item => `<li class="list-disc list-inside text-sm text-gray-700">${item}</li>`).join("");
+                const listItems = items.map(item =>
+                    `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`
+                ).join("");
 
                 return `
-    <div class="border-b pb-2">
-      <button type="button" class="w-full flex justify-between items-center text-left font-semibold text-gray-800 py-2" data-toggle="${sectionId}">
+    <div class="border-t pt-4">
+      <button type="button"
+              class="group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
+              data-toggle="${sectionId}">
         ${title}
-        <svg class="w-4 h-4 transform transition-transform" data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300 group-[.open]:rotate-180"
+             data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-      <ul id="${sectionId}" class="hidden pl-4 mt-2 space-y-1">${listItems}</ul>
+      <div id="${sectionId}"
+           class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+        ${listItems}
+      </div>
     </div>
   `;
             }
 
-            // Insert all dropdown sections
-            detailsContainer.insertAdjacentHTML("beforeend", [
+
+            // 📦 Clear existing
+            detailsContainer.innerHTML = "";
+
+            // 📜 Build standard product sections
+            const sectionsHTML = [
                 createDropdownSection("Description", product.descriptionList),
                 createDropdownSection("Key Details", product.keyDetails),
                 createDropdownSection("Sizing Info", product.sizingInfo),
-                createDropdownSection("Care Instructions", product.careInstructions)
-            ].join(""));
+                createDropdownSection("Care Instructions", product.careInstructions),
+            ];
+
+            // 📦 Add Shipping & Returns
+            const shippingReturns = [
+                "Free standard shipping on all U.S. orders over $50",
+                "Orders ship within 2–3 business days",
+                "30-day hassle-free returns for unused items"
+            ];
+            sectionsHTML.push(createDropdownSection("Shipping & Returns", shippingReturns));
+
+            // ✅ Render all dropdowns
+            detailsContainer.insertAdjacentHTML("beforeend", sectionsHTML.join(""));
+
+            // 🔄 Animate dropdowns
+            detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = btn.getAttribute("data-toggle");
+                    const content = document.getElementById(id);
+                    const arrow = btn.querySelector(`[data-arrow="${id}"]`);
+                    const isOpen = content.classList.contains("max-h-[1000px]");
+
+                    if (isOpen) {
+                        content.classList.remove("max-h-[1000px]", "opacity-100");
+                        content.classList.add("max-h-0", "opacity-0");
+                        btn.classList.remove("group-[.open]");
+                    } else {
+                        content.classList.remove("max-h-0", "opacity-0");
+                        content.classList.add("max-h-[1000px]", "opacity-100");
+                        btn.classList.add("group-[.open]");
+                    }
+                });
+            });
+
 
             // Attach toggle functionality
             detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
