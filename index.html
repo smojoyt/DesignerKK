@@ -58,24 +58,29 @@
     </style>
 </head>
 <body class="bg-[#ffeddf] text-gray-900">
-    <div class="relative w-full pt-16 overflow-hidden h-[250px] md:h-[500px]">
-        <!-- Default banner video -->
-        <video id="catalog-banner-video" autoplay muted loop playsinline
-               class="absolute inset-0 w-full h-full object-cover z-0">
-            <source src="https://karrykraze.com/imgs/Banner/BagPreview_06.mp4" type="video/mp4">
+    <!-- Banner Section -->
+    <div class="relative w-full pt-16 overflow-hidden">
+        <!-- Default video banner -->
+        <video id="catalog-banner-video"
+               autoplay muted loop playsinline
+               class="w-full object-cover absolute inset-0 -z-10">
+            <source src="/videos/default-banner.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <!-- Image banner (shown on category selection) -->
-        <img id="catalog-banner-image" src="" alt="Category Banner"
-             class="absolute inset-0 w-full h-full object-cover z-0 hidden" />
+        <!-- Category banner image -->
+        <img id="catalog-banner-image"
+             class="w-full object-cover absolute inset-0 -z-10 hidden"
+             src=""
+             alt="Category Banner" />
 
-        <!-- Banner text -->
+        <!-- Banner Text -->
         <div id="banner-text"
-             class="absolute left-4 bottom-2 md:bottom-4 text-4xl md:text-[12rem] font-extrabold text-white drop-shadow-lg bg-black/40 px-2 md:px-6 py-1 md:py-4 rounded-lg capitalize tracking-wide z-10">
+             class="px-4 py-8 text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg bg-black/40 inline-block capitalize tracking-wide">
             <span id="banner-text-content">All Products</span>
         </div>
     </div>
+
 
 
 
