@@ -407,7 +407,7 @@
                     return `
         <div class="item ${classList}" data-key="${key}" data-name="${product.name}" data-price="${product.price}" data-discount="${product.discount || 0}">
             <div class="rounded overflow-hidden shadow-sm bg-white flex flex-col">
-                <img src="${product.image}" alt="${product.name}" class="w-full aspect-square object-cover" loading="lazy">
+                <img src="${product.image}" alt="${product.name}" class="w-full max-h-64 object-cover rounded-t" loading="lazy">
                 <div class="p-3 flex flex-col gap-1">
                     <h3 class="text-lg font-bold">${product.name}</h3>
                     <div class="text-base font-bold text-green-700">$${product.price.toFixed(2)}</div>
