@@ -187,18 +187,19 @@
             <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl z-10">&times;</button>
 
             <!-- LEFT: Image & Thumbnails -->
-            <div class="w-full md:w-1/2 bg-gray-100 md:p-4 flex flex-col md:block relative">
+            <div class="w-full md:w-1/2 bg-gray-100 relative flex flex-col">
 
-                <!-- Sticky image for mobile, static on desktop -->
-                <div class="sticky top-0 z-10 md:static bg-white">
+                <!-- Sticky Main Image (mobile only) -->
+                <div class="sticky top-0 z-20 bg-white md:static">
                     <div id="modal-image-main"
                          class="w-full aspect-square bg-center bg-cover md:rounded-lg"></div>
                 </div>
 
-                <!-- Thumbnails - scrollable and always below image -->
+                <!-- Thumbnails - always visible below image -->
                 <div id="modal-thumbnails"
-                     class="flex gap-2 overflow-x-auto p-2 md:p-0 bg-gray-100 border-t md:border-none"></div>
+                     class="flex gap-2 overflow-x-auto p-2 border-t md:border-none bg-gray-100"></div>
             </div>
+
 
 
 
