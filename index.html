@@ -646,23 +646,27 @@
                 const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
 
                 return `
-                                    <div class="border-t pt-4">
-                                        <button type="button"
-                                                class="toggle-btn group w-full flex justify-between items-center text-left font-extrabold text-gray-900 uppercase tracking-wide"
-                                                data-toggle="${sectionId}">
-                                            ${title}
-                                            <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
-                                                data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                            </svg>
-                                        </button>
-                                        <div id="${sectionId}"
-                                            class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
-                                            ${listItems}
-                                        </div>
-                                    </div>`;
+                                    <div class="pt-4 group">
+    <button type="button"
+            class="toggle-btn w-full flex justify-between items-center text-left font-extrabold text-gray-900 uppercase tracking-wide"
+            data-toggle="${sectionId}">
+        <span class="flex flex-col">
+            ${title}
+            <div class="mt-2 mb-4 h-1 bg-[#f88379] rounded w-0 transition-all duration-300 group-hover:w-20"></div>
+        </span>
+        <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
+             data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </button>
+    <div id="${sectionId}"
+         class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+        ${listItems}
+    </div>
+</div>
+
             }
 
             const sectionsHTML = [
