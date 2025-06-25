@@ -178,8 +178,8 @@
 
 
 
-    <div id="product-modal" class="fixed py-10 inset-0 z-50 bg-black bg-opacity-70 hidden flex items-center justify-center px-2">
-        <div class="flex flex-col md:flex-row bg-white rounded-xl w-full max-w-5xl mx-auto max-h-[95vh] md:h-auto overflow-hidden relative">
+    <div id="product-modal" class="fixed inset-0 z-50 bg-black bg-opacity-70 hidden flex items-center justify-center px-2">
+        <div class="flex py-10 flex-col md:flex-row bg-white rounded-xl w-full max-w-5xl mx-auto max-h-[95vh] md:h-auto overflow-hidden relative">
 
             <!-- Close Button -->
             <button id="modal-close"
@@ -643,43 +643,56 @@
                 if (!items || items.length === 0) return "";
 
                 const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
-                const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
+
+                let contentHTML = "";
+
+                if (title === "Shipping & Returns") {
+                    // Use a static custom paragraph with email link
+                    contentHTML = `
+            <p class="text-base leading-relaxed text-gray-700">
+                Final sale on discounted items. For a full refund, request a return within 24 hours of delivery. 
+                Items must be in original condition and packaging. Need help? Email us at 
+                <a href="mailto:contact@karrykraze.com" class="underline text-blue-600">contact@karrykraze.com</a>.
+            </p>
+        `;
+                } else {
+                    contentHTML = `<ul>${items.map(item => `<li class="font-semibold text-base leading-relaxed list-disc list-inside">${item}</li>`).join("")}</ul>`;
+                }
 
                 return `
-                                    <div class="pt-4 group">
-    <button type="button"
-            class="toggle-btn w-full flex justify-between items-center text-left font-extrabold text-gray-900 uppercase tracking-wide"
-            data-toggle="${sectionId}">
-        <span class="flex flex-col">
-            ${title}
-            <div class="h-1 bg-[#f88379] rounded w-0 transition-all duration-300 group-hover:w-20"></div>
-        </span>
-        <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
-             data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
-             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-    </button>
-    <div id="${sectionId}"
-         class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
-        ${listItems}
-    </div>
-</div>
-`;
+        <div class="pt-4 group">
+            <button type="button"
+                    class="text-lg toggle-btn w-full flex justify-between items-center text-left font-extrabold text-gray-900 uppercase tracking-wide"
+                    data-toggle="${sectionId}">
+                <span class="flex flex-col">
+                    ${title}
+                    <div class="h-1 bg-[#f88379] rounded w-0 transition-all duration-300 group-hover:w-20"></div>
+                </span>
+                <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
+                     data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <div id="${sectionId}"
+                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+                ${contentHTML}
+            </div>
+        </div>
+    `;
             }
+
+
 
             const sectionsHTML = [
                 createDropdownSection("Description", product.descriptionList),
                 createDropdownSection("Key Details", product.keyDetails),
                 createDropdownSection("Sizing Info", product.sizingInfo),
                 createDropdownSection("Care Instructions", product.careInstructions),
-                createDropdownSection("Shipping & Returns", [
-                    "Free standard shipping on all U.S. orders over $50",
-                    "Orders ship within 2–3 business days",
-                    "30-day hassle-free returns for unused items"
-                ])
+                createDropdownSection("Shipping & Returns", ["custom"]) // use custom <p> block inside the function
             ];
+
 
             detailsContainer.insertAdjacentHTML("beforeend", sectionsHTML.join(""));
 
