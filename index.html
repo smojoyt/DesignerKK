@@ -178,541 +178,543 @@
 
 
 
-    <!-- Product Modal Overlay -->
-    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-xl w-[90%] max-w-5xl flex flex-col md:flex-row overflow-hidden relative">
-            <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl">&times;</button>
+    <!-- Outer Modal Wrapper -->
+    <div id="product-modal"
+         class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center px-2">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl h-[95vh] overflow-hidden flex flex-col md:flex-row relative">
+                <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl">&times;</button>
 
-            <!-- Left: Image Gallery -->
-            <div class="w-full md:w-1/2 bg-gray-100 p-4">
-                <div id="modal-image-main" class="w-full aspect-square bg-center bg-cover rounded mb-2"></div>
-                <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto"></div>
-            </div>
+                <!-- Left: Image Gallery -->
+                <div class="w-full md:w-1/2 bg-gray-100 p-4 overflow-y-auto max-h-[50vh] md:max-h-full">
+                    <div id="modal-image-main" class="w-full aspect-square bg-center bg-cover rounded mb-2"></div>
+                    <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto"></div>
+                </div>
 
-            <!-- Right: Product Info -->
-            <div class="w-full md:w-1/2 p-4 flex flex-col justify-between">
-                <div class="space-y-4">
+                <!-- Right: Product Info -->
+                <div class="w-full md:w-1/2 p-4 flex flex-col justify-between overflow-y-auto max-h-[60vh] md:max-h-full">
+                    <div class="space-y-4">
 
-                    <!-- Product Name & Checkout ID -->
-                    <div>
-                        <h2 id="modal-product-name" class="text-2xl font-extrabold text-gray-900 uppercase"></h2>
-                        <p id="modal-product-id" class="text-sm text-gray-600"></p>
-                    </div>
+                        <!-- Product Name & Checkout ID -->
+                        <div>
+                            <h2 id="modal-product-name" class="text-2xl font-extrabold text-gray-900 uppercase"></h2>
+                            <p id="modal-product-id" class="text-sm text-gray-600"></p>
+                        </div>
 
-                    <!-- Pricing -->
-                    <div class="space-y-1">
-                        <p class="text-green-700 font-bold text-lg">
-                            Now <span id="modal-product-price" class="text-2xl"></span>
-                            <span id="modal-product-original" class="text-gray-500 line-through text-base ml-2"></span>
-                        </p>
-                        <div class="flex items-center gap-2 text-sm">
-                            <span id="modal-discount-label" class="bg-red-100 text-red-700 font-semibold px-2 py-1 rounded">20% OFF</span>
-                            <span id="modal-savings-label" class="bg-green-100 text-green-700 px-2 py-1 rounded">You save $8.99</span>
+                        <!-- Pricing -->
+                        <div class="space-y-1">
+                            <p class="text-green-700 font-bold text-lg">
+                                Now <span id="modal-product-price" class="text-2xl"></span>
+                                <span id="modal-product-original" class="text-gray-500 line-through text-base ml-2"></span>
+                            </p>
+                            <div class="flex items-center gap-2 text-sm">
+                                <span id="modal-discount-label" class="bg-red-100 text-red-700 font-semibold px-2 py-1 rounded">20% OFF</span>
+                                <span id="modal-savings-label" class="bg-green-100 text-green-700 px-2 py-1 rounded">You save $8.99</span>
+                            </div>
+                        </div>
+
+                        <!-- Variants -->
+                        <div>
+                            <h3 class="text-sm font-semibold uppercase mb-1">Choose a color</h3>
+                            <div id="variantSelectorGroup" class="flex gap-4"></div>
                         </div>
                     </div>
 
-                    <!-- Variants -->
-                    <div>
-                        <h3 class="text-sm font-semibold uppercase mb-1">Choose a color</h3>
-                        <div id="variantSelectorGroup" class="flex gap-4"></div>
+                    <!-- Purchase Button -->
+                    <div class="sticky bottom-0 bg-white py-4">
+                        <button id="modal-purchase-btn"
+                                class="w-full bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-3 rounded text-center text-lg uppercase transition">
+                            Purchase
+                        </button>
                     </div>
-                </div>
 
-                <!-- Purchase Button -->
-                <div class="mt-6">
-                    <button id="modal-purchase-btn"
-                            class="w-full bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-3 rounded text-center text-lg uppercase transition">
-                        Purchase
-                    </button>
-                </div>
 
-                <!-- Collapsible Details -->
-                <div class="mt-6 space-y-2">
-                    <!-- Each section will be injected here -->
-                    <div id="modal-details-container"></div>
+                    <!-- Collapsible Details -->
+                    <div class="mt-6 space-y-2">
+                        <!-- Each section will be injected here -->
+                        <div id="modal-details-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
 
 
-    <!-- Footer -->
+        <!-- Footer -->
 
 
-    <script>
-        const toggleBtn = document.getElementById("toggle-filters");
-        const sidebar = document.getElementById("filter-sidebar");
-        const backdrop = document.getElementById("filter-backdrop");
-        const closeBtn = document.getElementById("close-filters");
-        const catalogMain = document.getElementById("catalog-main");
+        <script>
+            const toggleBtn = document.getElementById("toggle-filters");
+            const sidebar = document.getElementById("filter-sidebar");
+            const backdrop = document.getElementById("filter-backdrop");
+            const closeBtn = document.getElementById("close-filters");
+            const catalogMain = document.getElementById("catalog-main");
 
-        let globalProducts = {};
-        let sidebarOpen = false;
-        let filters = {};
-        let iso; // ✅ Isotope instance (declared globally)
+            let globalProducts = {};
+            let sidebarOpen = false;
+            let filters = {};
+            let iso; // ✅ Isotope instance (declared globally)
 
-        function setBannerFromCategory(category, products) {
-            const bannerVideo = document.getElementById("catalog-banner-video");
-            const bannerImage = document.getElementById("catalog-banner-image");
-            const textEl = document.getElementById("banner-text-content");
+            function setBannerFromCategory(category, products) {
+                const bannerVideo = document.getElementById("catalog-banner-video");
+                const bannerImage = document.getElementById("catalog-banner-image");
+                const textEl = document.getElementById("banner-text-content");
 
-            const categoryTextMap = {
-                lv: "Louis Vuitton",
-                tc: "Telfar",
-                chanel: "Chanel"
-            };
+                const categoryTextMap = {
+                    lv: "Louis Vuitton",
+                    tc: "Telfar",
+                    chanel: "Chanel"
+                };
 
-            if (!category) {
-                // No category: Show video, hide image, reset text
-                bannerVideo.classList.remove("hidden");
-                bannerImage.classList.add("hidden");
-                textEl.textContent = "All Products";
-                return;
-            }
-
-            const matching = Object.values(products).filter(p =>
-                Array.isArray(p.category)
-                    ? p.category.map(c => c.toLowerCase()).includes(category.toLowerCase())
-                    : p.category?.toLowerCase() === category.toLowerCase()
-            );
-
-            if (matching.length > 0) {
-                const randomItem = matching[Math.floor(Math.random() * matching.length)];
-
-                if (randomItem.banner) {
-                    bannerImage.src = randomItem.banner;
-                    bannerImage.classList.remove("hidden");
-                    bannerVideo.classList.add("hidden");
-
-                    textEl.textContent = categoryTextMap[category.toLowerCase()] || category;
-                }
-            } else {
-                // Fallback to default
-                bannerVideo.classList.remove("hidden");
-                bannerImage.classList.add("hidden");
-                textEl.textContent = "All Products";
-            }
-        }
-
-
-
-        function isMobile() {
-            return window.matchMedia("(max-width: 767px)").matches;
-        }
-
-        function openSidebar() {
-            sidebar.classList.remove("-translate-x-full");
-            sidebarOpen = true;
-            if (isMobile()) {
-                backdrop.classList.remove("hidden");
-            } else {
-                catalogMain.classList.add("ml-64");
-            }
-            // ⏱ Delay Isotope layout until after animation finishes
-            let count = 0;
-            const intervalId = setInterval(() => {
-                if (iso) iso.layout();
-                count++;
-                if (count >= 2) clearInterval(intervalId);
-            }, 500); // every 500ms (or whatever timing you prefer)
-
-        }
-
-        function closeSidebar() {
-            sidebar.classList.add("-translate-x-full");
-            sidebarOpen = false;
-            if (isMobile()) {
-                backdrop.classList.add("hidden");
-            } else {
-                catalogMain.classList.remove("ml-64");
-            }
-            // ⏱ Delay Isotope layout until after animation finishes
-            setTimeout(() => {
-                if (iso) iso.layout();
-            }, 350);
-        }
-
-
-        toggleBtn.addEventListener("click", () => {
-            sidebarOpen ? closeSidebar() : openSidebar();
-        });
-
-        closeBtn?.addEventListener("click", closeSidebar);
-        backdrop?.addEventListener("click", closeSidebar);
-
-        window.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("product-grid");
-            const urlParams = new URLSearchParams(window.location.search); // ✅ moved to top
-
-            Promise.all([
-                fetch("https://karrykraze.com/products/products.json").then(res => res.json()),
-                fetch("https://karrykraze.com/products/promotion.json").then(res => res.json())
-            ]).then(([products, promotionsFile]) => {
-                const promotions = promotionsFile.promotions || [];
-                const updatedProducts = applyPromotionsToProducts(products, promotions);
-                globalProducts = updatedProducts;
-
-                // 🌟 Dynamic Banner from URL category
-                const selectedCategory = urlParams.get("category");
-                if (selectedCategory) {
-                    setBannerFromCategory(selectedCategory, updatedProducts);
+                if (!category) {
+                    // No category: Show video, hide image, reset text
+                    bannerVideo.classList.remove("hidden");
+                    bannerImage.classList.add("hidden");
+                    textEl.textContent = "All Products";
+                    return;
                 }
 
-                // 🧩 Render product cards
-                Object.entries(updatedProducts).forEach(([key, p]) => {
-                    if (key.includes("_Dummy")) return;
-                    if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
+                const matching = Object.values(products).filter(p =>
+                    Array.isArray(p.category)
+                        ? p.category.map(c => c.toLowerCase()).includes(category.toLowerCase())
+                        : p.category?.toLowerCase() === category.toLowerCase()
+                );
 
-                    // 🧠 Convert categories to class selectors
-                    const categoryClasses = Array.isArray(p.category)
-                        ? p.category.map(c => c.toLowerCase()).map(c => `.${c}`)
-                        : [`.${p.category?.toLowerCase()}`];
+                if (matching.length > 0) {
+                    const randomItem = matching[Math.floor(Math.random() * matching.length)];
 
-                    const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
-                    const classList = [...categoryClasses, ...tagClasses].join(" ");
+                    if (randomItem.banner) {
+                        bannerImage.src = randomItem.banner;
+                        bannerImage.classList.remove("hidden");
+                        bannerVideo.classList.add("hidden");
 
-                    const html = renderCatalogCard(p, key, classList);
-                    container.insertAdjacentHTML("beforeend", html);
-                });
-
-
-
-
-
-
-                imagesLoaded(container, () => {
-                    iso = new Isotope(container, {
-                        sortBy: 'best-deals',
-                        sortAscending: false,
-                        itemSelector: '.item',
-                        layoutMode: 'fitRows',
-                        getSortData: {
-                            name: '[data-name]',
-                            'price-low': '[data-price] parseFloat',
-                            'price-high': '[data-price] parseFloat',
-                            'best-deals': '[data-discount] parseInt'
-                        }
-                    });
-
-                    // ✅ Add the event listener here:
-                    container.addEventListener("click", (e) => {
-                        console.log("🟡 Click detected in container");
-
-                        const card = e.target.closest(".item");
-                        if (!card) {
-                            console.log("❌ No item found on click target");
-                            return;
-                        }
-
-                        const key = card.dataset.key;
-                        console.log("✅ Card clicked, data-key:", key);
-
-                        const product = updatedProducts[key];
-                        if (!product) {
-                            console.log("❌ No product found for key:", key);
-                            return;
-                        }
-
-                        openProductModal(product, key);
-
-                    });
+                        textEl.textContent = categoryTextMap[category.toLowerCase()] || category;
+                    }
+                } else {
+                    // Fallback to default
+                    bannerVideo.classList.remove("hidden");
+                    bannerImage.classList.add("hidden");
+                    textEl.textContent = "All Products";
+                }
+            }
 
 
 
-                    // ✅ Apply URL-based filters on load (supports multiple values per group)
-                    const preselectedFilters = [];
+            function isMobile() {
+                return window.matchMedia("(max-width: 767px)").matches;
+            }
 
-                    document.querySelectorAll('.filter-checkbox').forEach(cb => {
-                        const group = cb.dataset.group;
-                        const paramValue = urlParams.get(group); // supports ?category=bags&tags=onsale,bestseller
+            function openSidebar() {
+                sidebar.classList.remove("-translate-x-full");
+                sidebarOpen = true;
+                if (isMobile()) {
+                    backdrop.classList.remove("hidden");
+                } else {
+                    catalogMain.classList.add("ml-64");
+                }
+                // ⏱ Delay Isotope layout until after animation finishes
+                let count = 0;
+                const intervalId = setInterval(() => {
+                    if (iso) iso.layout();
+                    count++;
+                    if (count >= 2) clearInterval(intervalId);
+                }, 500); // every 500ms (or whatever timing you prefer)
 
-                        if (paramValue) {
-                            const values = paramValue.split(',');
-                            values.forEach(val => {
-                                if (cb.value.toLowerCase() === `.${val.toLowerCase()}`) {
-                                    cb.checked = true;
-                                    preselectedFilters.push(`.${val}`);
-                                }
-                            });
-                        }
-                    });
+            }
 
-                    if (preselectedFilters.length > 0) {
-                        iso.arrange({ filter: preselectedFilters.join('') });
+            function closeSidebar() {
+                sidebar.classList.add("-translate-x-full");
+                sidebarOpen = false;
+                if (isMobile()) {
+                    backdrop.classList.add("hidden");
+                } else {
+                    catalogMain.classList.remove("ml-64");
+                }
+                // ⏱ Delay Isotope layout until after animation finishes
+                setTimeout(() => {
+                    if (iso) iso.layout();
+                }, 350);
+            }
+
+
+            toggleBtn.addEventListener("click", () => {
+                sidebarOpen ? closeSidebar() : openSidebar();
+            });
+
+            closeBtn?.addEventListener("click", closeSidebar);
+            backdrop?.addEventListener("click", closeSidebar);
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const container = document.getElementById("product-grid");
+                const urlParams = new URLSearchParams(window.location.search); // ✅ moved to top
+
+                Promise.all([
+                    fetch("https://karrykraze.com/products/products.json").then(res => res.json()),
+                    fetch("https://karrykraze.com/products/promotion.json").then(res => res.json())
+                ]).then(([products, promotionsFile]) => {
+                    const promotions = promotionsFile.promotions || [];
+                    const updatedProducts = applyPromotionsToProducts(products, promotions);
+                    globalProducts = updatedProducts;
+
+                    // 🌟 Dynamic Banner from URL category
+                    const selectedCategory = urlParams.get("category");
+                    if (selectedCategory) {
+                        setBannerFromCategory(selectedCategory, updatedProducts);
                     }
 
+                    // 🧩 Render product cards
+                    Object.entries(updatedProducts).forEach(([key, p]) => {
+                        if (key.includes("_Dummy")) return;
+                        if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
 
-                    // 🧠 Sort select
-                    document.getElementById('sort-select').addEventListener('change', e => {
-                        const val = e.target.value;
-                        iso.updateSortData();
-                        if (val === 'price-high') {
-                            iso.arrange({ sortBy: 'price-low', sortAscending: false });
-                        } else if (val === 'price-low') {
-                            iso.arrange({ sortBy: 'price-low', sortAscending: true });
-                        } else if (val === 'best-deals') {
-                            iso.arrange({ sortBy: 'best-deals', sortAscending: false });
-                        } else {
-                            iso.arrange({ sortBy: val });
-                        }
+                        // 🧠 Convert categories to class selectors
+                        const categoryClasses = Array.isArray(p.category)
+                            ? p.category.map(c => c.toLowerCase()).map(c => `.${c}`)
+                            : [`.${p.category?.toLowerCase()}`];
+
+                        const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
+                        const classList = [...categoryClasses, ...tagClasses].join(" ");
+
+                        const html = renderCatalogCard(p, key, classList);
+                        container.insertAdjacentHTML("beforeend", html);
                     });
 
-                    // ✅ Filters apply and dynamic banner update
-                    document.getElementById('apply-filters').addEventListener('click', () => {
-                        const allFilters = {};
-                        document.querySelectorAll('.filter-checkbox:checked').forEach(cb => {
-                            const group = cb.dataset.group;
-                            const val = cb.value;
-                            if (!allFilters[group]) allFilters[group] = [];
-                            allFilters[group].push(val);
+
+
+
+
+
+                    imagesLoaded(container, () => {
+                        iso = new Isotope(container, {
+                            sortBy: 'best-deals',
+                            sortAscending: false,
+                            itemSelector: '.item',
+                            layoutMode: 'fitRows',
+                            getSortData: {
+                                name: '[data-name]',
+                                'price-low': '[data-price] parseFloat',
+                                'price-high': '[data-price] parseFloat',
+                                'best-deals': '[data-discount] parseInt'
+                            }
                         });
 
-                        const filterSelector = Object.values(allFilters)
-                            .map(groupVals => groupVals.join(','))
-                            .join('');
+                        // ✅ Add the event listener here:
+                        container.addEventListener("click", (e) => {
+                            console.log("🟡 Click detected in container");
 
-                        iso.arrange({ filter: filterSelector || '*' });
+                            const card = e.target.closest(".item");
+                            if (!card) {
+                                console.log("❌ No item found on click target");
+                                return;
+                            }
 
-                        // 🔄 Banner update from active category filter
-                        const selectedCategory = (allFilters["category"] || [])[0];
-                        if (selectedCategory) {
-                            setBannerFromCategory(selectedCategory.replace(".", ""), updatedProducts);
+                            const key = card.dataset.key;
+                            console.log("✅ Card clicked, data-key:", key);
+
+                            const product = updatedProducts[key];
+                            if (!product) {
+                                console.log("❌ No product found for key:", key);
+                                return;
+                            }
+
+                            openProductModal(product, key);
+
+                        });
+
+
+
+                        // ✅ Apply URL-based filters on load (supports multiple values per group)
+                        const preselectedFilters = [];
+
+                        document.querySelectorAll('.filter-checkbox').forEach(cb => {
+                            const group = cb.dataset.group;
+                            const paramValue = urlParams.get(group); // supports ?category=bags&tags=onsale,bestseller
+
+                            if (paramValue) {
+                                const values = paramValue.split(',');
+                                values.forEach(val => {
+                                    if (cb.value.toLowerCase() === `.${val.toLowerCase()}`) {
+                                        cb.checked = true;
+                                        preselectedFilters.push(`.${val}`);
+                                    }
+                                });
+                            }
+                        });
+
+                        if (preselectedFilters.length > 0) {
+                            iso.arrange({ filter: preselectedFilters.join('') });
                         }
 
-                        closeSidebar();
+
+                        // 🧠 Sort select
+                        document.getElementById('sort-select').addEventListener('change', e => {
+                            const val = e.target.value;
+                            iso.updateSortData();
+                            if (val === 'price-high') {
+                                iso.arrange({ sortBy: 'price-low', sortAscending: false });
+                            } else if (val === 'price-low') {
+                                iso.arrange({ sortBy: 'price-low', sortAscending: true });
+                            } else if (val === 'best-deals') {
+                                iso.arrange({ sortBy: 'best-deals', sortAscending: false });
+                            } else {
+                                iso.arrange({ sortBy: val });
+                            }
+                        });
+
+                        // ✅ Filters apply and dynamic banner update
+                        document.getElementById('apply-filters').addEventListener('click', () => {
+                            const allFilters = {};
+                            document.querySelectorAll('.filter-checkbox:checked').forEach(cb => {
+                                const group = cb.dataset.group;
+                                const val = cb.value;
+                                if (!allFilters[group]) allFilters[group] = [];
+                                allFilters[group].push(val);
+                            });
+
+                            const filterSelector = Object.values(allFilters)
+                                .map(groupVals => groupVals.join(','))
+                                .join('');
+
+                            iso.arrange({ filter: filterSelector || '*' });
+
+                            // 🔄 Banner update from active category filter
+                            const selectedCategory = (allFilters["category"] || [])[0];
+                            if (selectedCategory) {
+                                setBannerFromCategory(selectedCategory.replace(".", ""), updatedProducts);
+                            }
+
+                            closeSidebar();
+                        });
+
+
                     });
-
-
                 });
             });
-        });
 
 
 
 
 
 
-        // Other included HTML
-        function includeHTML(id, filePath, callback = null) {
-            fetch(filePath)
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById(id).innerHTML = html;
-                    if (callback) callback();
-                });
-        }
-
-        function initNavbar() {
-            const toggleBtn = document.getElementById("mobile-menu-button");
-            const menu = document.getElementById("mobile-menu");
-            if (toggleBtn && menu) toggleBtn.addEventListener("click", () => menu.classList.toggle("hidden"));
-
-            const cart = JSON.parse(localStorage.getItem("savedCart")) || [];
-            const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-            const countElem = document.getElementById("cart-count");
-            if (countElem) countElem.textContent = totalQty;
-
-            const navbar = document.getElementById('mainNavbar');
-            let lastScrollY = window.scrollY;
-            window.addEventListener('scroll', () => {
-                if (!navbar) return;
-                if (window.scrollY > lastScrollY && window.scrollY > 50) {
-                    navbar.classList.replace('navbar-show', 'navbar-hide');
-                } else {
-                    navbar.classList.replace('navbar-hide', 'navbar-show');
-                }
-                lastScrollY = window.scrollY;
-            });
-        }
-
-        function openProductModal(product, productKey) {
-            const modal = document.getElementById("product-modal");
-            const modalName = document.getElementById("modal-product-name");
-            const modalId = document.getElementById("modal-product-id");
-            const modalPrice = document.getElementById("modal-product-price");
-            const modalOriginal = document.getElementById("modal-product-original");
-            const modalDiscountLabel = document.getElementById("modal-discount-label");
-            const modalSavingsLabel = document.getElementById("modal-savings-label");
-            const modalImageMain = document.getElementById("modal-image-main");
-            const modalThumbnails = document.getElementById("modal-thumbnails");
-            const variantGroup = document.getElementById("variantSelectorGroup");
-            const purchaseBtn = document.getElementById("modal-purchase-btn");
-            const detailsContainer = document.getElementById("modal-details-container");
-
-            modal.dataset.key = productKey;
-            modalName.textContent = product.name;
-            modalId.textContent = `Product ID: ${product.checkout_product_id || productKey}`;
-            modalImageMain.style.backgroundImage = `url(${product.thumbnails?.[0] || product.image})`;
-
-            // Price + Discounts
-            const salePrice = parseFloat(product.price);
-            const originalPrice = parseFloat(product.original_price || product.price);
-            modalPrice.textContent = `$${salePrice.toFixed(2)}`;
-
-            if (originalPrice > salePrice) {
-                const savings = (originalPrice - salePrice).toFixed(2);
-                const discountPercent = Math.round(((originalPrice - salePrice) / originalPrice) * 100);
-                modalOriginal.textContent = `$${originalPrice.toFixed(2)}`;
-                modalDiscountLabel.textContent = `${discountPercent}% OFF`;
-                modalSavingsLabel.textContent = `You save $${savings}`;
-                modalDiscountLabel.classList.remove("hidden");
-                modalSavingsLabel.classList.remove("hidden");
-            } else {
-                modalOriginal.textContent = "";
-                modalDiscountLabel.classList.add("hidden");
-                modalSavingsLabel.classList.add("hidden");
+            // Other included HTML
+            function includeHTML(id, filePath, callback = null) {
+                fetch(filePath)
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById(id).innerHTML = html;
+                        if (callback) callback();
+                    });
             }
 
-            // Thumbnails
-            modalThumbnails.innerHTML = "";
-            (product.thumbnails || [product.image]).forEach((thumb) => {
-                const img = document.createElement("img");
-                img.src = thumb;
-                img.className = "w-16 h-16 object-cover rounded cursor-pointer border";
-                img.addEventListener("click", () => {
-                    modalImageMain.style.backgroundImage = `url(${thumb})`;
-                });
-                modalThumbnails.appendChild(img);
-            });
+            function initNavbar() {
+                const toggleBtn = document.getElementById("mobile-menu-button");
+                const menu = document.getElementById("mobile-menu");
+                if (toggleBtn && menu) toggleBtn.addEventListener("click", () => menu.classList.toggle("hidden"));
 
-            // Variants
-            const variants = product.custom1Options?.split("|") || ["Default"];
-            variantGroup.innerHTML = "";
+                const cart = JSON.parse(localStorage.getItem("savedCart")) || [];
+                const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+                const countElem = document.getElementById("cart-count");
+                if (countElem) countElem.textContent = totalQty;
 
-            variants.forEach((variant, index) => {
-                const id = `variant-${productKey}-${index}`;
-                const label = document.createElement("label");
-                label.className = "flex flex-col items-center cursor-pointer";
-
-                const input = document.createElement("input");
-                input.type = "radio";
-                input.name = "variant";
-                input.value = variant;
-                input.id = id;
-                input.className = "sr-only";
-                if (index === 0) input.checked = true;
-
-                const circle = document.createElement("div");
-                circle.className = `w-8 h-8 rounded-full border-2 border-black`;
-                circle.style.backgroundColor = variant.toLowerCase();
-
-                const text = document.createElement("span");
-                text.className = "text-xs mt-1";
-                text.textContent = variant;
-
-                label.appendChild(input);
-                label.appendChild(circle);
-                label.appendChild(text);
-                variantGroup.appendChild(label);
-            });
-
-            // Purchase Logic
-            purchaseBtn.onclick = () => {
-                const productKey = modal.dataset.key;
-                const product = globalProducts[productKey];
-                if (!product) return;
-
-                const checkoutId = product.checkout_product_id || productKey;
-                const selectedVariant = document.querySelector('input[name="variant"]:checked')?.value || "Default";
-                const quantity = 1;
-                const productString = `${checkoutId}-${selectedVariant}:${quantity}`;
-                const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodeURIComponent(productString)}&cart_origin=overlay`;
-                window.location.href = checkoutUrl;
-            };
-
-            // ---------- DETAILS DROPDOWNS ----------
-            detailsContainer.innerHTML = "";
-
-            function createDropdownSection(title, items = []) {
-                if (!items || items.length === 0) return "";
-
-                const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
-                const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
-
-                return `
-        <div class="border-t pt-4">
-            <button type="button"
-                    class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
-                    data-toggle="${sectionId}">
-                ${title}
-                <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
-                    data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </button>
-            <div id="${sectionId}"
-                class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
-                ${listItems}
-            </div>
-        </div>`;
-            }
-
-            const sectionsHTML = [
-                createDropdownSection("Description", product.descriptionList),
-                createDropdownSection("Key Details", product.keyDetails),
-                createDropdownSection("Sizing Info", product.sizingInfo),
-                createDropdownSection("Care Instructions", product.careInstructions),
-                createDropdownSection("Shipping & Returns", [
-                    "Free standard shipping on all U.S. orders over $50",
-                    "Orders ship within 2–3 business days",
-                    "30-day hassle-free returns for unused items"
-                ])
-            ];
-
-            detailsContainer.insertAdjacentHTML("beforeend", sectionsHTML.join(""));
-
-            detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.getAttribute("data-toggle");
-                    const content = document.getElementById(id);
-                    const arrow = btn.querySelector(`[data-arrow="${id}"]`);
-
-                    const isOpen = content.classList.contains("max-h-[1000px]");
-                    if (content.classList.contains("max-h-0")) {
-                        content.classList.remove("max-h-0", "opacity-0");
-                        content.classList.add("max-h-[1000px]", "opacity-100");
-                        arrow.classList.add("rotate-180");
+                const navbar = document.getElementById('mainNavbar');
+                let lastScrollY = window.scrollY;
+                window.addEventListener('scroll', () => {
+                    if (!navbar) return;
+                    if (window.scrollY > lastScrollY && window.scrollY > 50) {
+                        navbar.classList.replace('navbar-show', 'navbar-hide');
                     } else {
-                        content.classList.remove("max-h-[1000px]", "opacity-100");
-                        content.classList.add("max-h-0", "opacity-0");
-                        arrow.classList.remove("rotate-180");
+                        navbar.classList.replace('navbar-hide', 'navbar-show');
                     }
+                    lastScrollY = window.scrollY;
                 });
+            }
+
+            function openProductModal(product, productKey) {
+                const modal = document.getElementById("product-modal");
+                const modalName = document.getElementById("modal-product-name");
+                const modalId = document.getElementById("modal-product-id");
+                const modalPrice = document.getElementById("modal-product-price");
+                const modalOriginal = document.getElementById("modal-product-original");
+                const modalDiscountLabel = document.getElementById("modal-discount-label");
+                const modalSavingsLabel = document.getElementById("modal-savings-label");
+                const modalImageMain = document.getElementById("modal-image-main");
+                const modalThumbnails = document.getElementById("modal-thumbnails");
+                const variantGroup = document.getElementById("variantSelectorGroup");
+                const purchaseBtn = document.getElementById("modal-purchase-btn");
+                const detailsContainer = document.getElementById("modal-details-container");
+
+                modal.dataset.key = productKey;
+                modalName.textContent = product.name;
+                modalId.textContent = `Product ID: ${product.checkout_product_id || productKey}`;
+                modalImageMain.style.backgroundImage = `url(${product.thumbnails?.[0] || product.image})`;
+
+                // Price + Discounts
+                const salePrice = parseFloat(product.price);
+                const originalPrice = parseFloat(product.original_price || product.price);
+                modalPrice.textContent = `$${salePrice.toFixed(2)}`;
+
+                if (originalPrice > salePrice) {
+                    const savings = (originalPrice - salePrice).toFixed(2);
+                    const discountPercent = Math.round(((originalPrice - salePrice) / originalPrice) * 100);
+                    modalOriginal.textContent = `$${originalPrice.toFixed(2)}`;
+                    modalDiscountLabel.textContent = `${discountPercent}% OFF`;
+                    modalSavingsLabel.textContent = `You save $${savings}`;
+                    modalDiscountLabel.classList.remove("hidden");
+                    modalSavingsLabel.classList.remove("hidden");
+                } else {
+                    modalOriginal.textContent = "";
+                    modalDiscountLabel.classList.add("hidden");
+                    modalSavingsLabel.classList.add("hidden");
+                }
+
+                // Thumbnails
+                modalThumbnails.innerHTML = "";
+                (product.thumbnails || [product.image]).forEach((thumb) => {
+                    const img = document.createElement("img");
+                    img.src = thumb;
+                    img.className = "w-16 h-16 object-cover rounded cursor-pointer border";
+                    img.addEventListener("click", () => {
+                        modalImageMain.style.backgroundImage = `url(${thumb})`;
+                    });
+                    modalThumbnails.appendChild(img);
+                });
+
+                // Variants
+                const variants = product.custom1Options?.split("|") || ["Default"];
+                variantGroup.innerHTML = "";
+
+                variants.forEach((variant, index) => {
+                    const id = `variant-${productKey}-${index}`;
+                    const label = document.createElement("label");
+                    label.className = "flex flex-col items-center cursor-pointer";
+
+                    const input = document.createElement("input");
+                    input.type = "radio";
+                    input.name = "variant";
+                    input.value = variant;
+                    input.id = id;
+                    input.className = "sr-only";
+                    if (index === 0) input.checked = true;
+
+                    const circle = document.createElement("div");
+                    circle.className = `w-8 h-8 rounded-full border-2 border-black`;
+                    circle.style.backgroundColor = variant.toLowerCase();
+
+                    const text = document.createElement("span");
+                    text.className = "text-xs mt-1";
+                    text.textContent = variant;
+
+                    label.appendChild(input);
+                    label.appendChild(circle);
+                    label.appendChild(text);
+                    variantGroup.appendChild(label);
+                });
+
+                // Purchase Logic
+                purchaseBtn.onclick = () => {
+                    const productKey = modal.dataset.key;
+                    const product = globalProducts[productKey];
+                    if (!product) return;
+
+                    const checkoutId = product.checkout_product_id || productKey;
+                    const selectedVariant = document.querySelector('input[name="variant"]:checked')?.value || "Default";
+                    const quantity = 1;
+                    const productString = `${checkoutId}-${selectedVariant}:${quantity}`;
+                    const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodeURIComponent(productString)}&cart_origin=overlay`;
+                    window.location.href = checkoutUrl;
+                };
+
+                // ---------- DETAILS DROPDOWNS ----------
+                detailsContainer.innerHTML = "";
+
+                function createDropdownSection(title, items = []) {
+                    if (!items || items.length === 0) return "";
+
+                    const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
+                    const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
+
+                    return `
+                <div class="border-t pt-4">
+                    <button type="button"
+                            class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
+                            data-toggle="${sectionId}">
+                        ${title}
+                        <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
+                            data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="${sectionId}"
+                        class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+                        ${listItems}
+                    </div>
+                </div>`;
+                }
+
+                const sectionsHTML = [
+                    createDropdownSection("Description", product.descriptionList),
+                    createDropdownSection("Key Details", product.keyDetails),
+                    createDropdownSection("Sizing Info", product.sizingInfo),
+                    createDropdownSection("Care Instructions", product.careInstructions),
+                    createDropdownSection("Shipping & Returns", [
+                        "Free standard shipping on all U.S. orders over $50",
+                        "Orders ship within 2–3 business days",
+                        "30-day hassle-free returns for unused items"
+                    ])
+                ];
+
+                detailsContainer.insertAdjacentHTML("beforeend", sectionsHTML.join(""));
+
+                detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const id = btn.getAttribute("data-toggle");
+                        const content = document.getElementById(id);
+                        const arrow = btn.querySelector(`[data-arrow="${id}"]`);
+
+                        const isOpen = content.classList.contains("max-h-[1000px]");
+                        if (content.classList.contains("max-h-0")) {
+                            content.classList.remove("max-h-0", "opacity-0");
+                            content.classList.add("max-h-[1000px]", "opacity-100");
+                            arrow.classList.add("rotate-180");
+                        } else {
+                            content.classList.remove("max-h-[1000px]", "opacity-100");
+                            content.classList.add("max-h-0", "opacity-0");
+                            arrow.classList.remove("rotate-180");
+                        }
+                    });
+                });
+
+                modal.classList.remove("hidden");
+            }
+
+
+
+
+            // 🔁 Main Load Flow
+            includeHTML("navbar-container", "/page_inserts/uni_navbart.html", () => {
+                initNavbar();
+
+                const addToCartBtn = document.getElementById("add-to-cart-btn");
+                if (addToCartBtn) {
+                    addToCartBtn.addEventListener("click", () => {
+                        const variant = document.getElementById("variantSelector")?.value || null;
+                        addToCart(activeProduct, variant);
+                    });
+                }
+
+                includeHTML("footer", "/page_inserts/footer.html");
+            });
+            document.getElementById("product-modal").addEventListener("click", (e) => {
+                if (e.target.id === "product-modal") {
+                    document.getElementById("product-modal").classList.add("hidden");
+                }
             });
 
-            modal.classList.remove("hidden");
-        }
 
-
-
-
-        // 🔁 Main Load Flow
-        includeHTML("navbar-container", "/page_inserts/uni_navbart.html", () => {
-            initNavbar();
-
-            const addToCartBtn = document.getElementById("add-to-cart-btn");
-            if (addToCartBtn) {
-                addToCartBtn.addEventListener("click", () => {
-                    const variant = document.getElementById("variantSelector")?.value || null;
-                    addToCart(activeProduct, variant);
-                });
-            }
-
-            includeHTML("footer", "/page_inserts/footer.html");
-        });
-        document.getElementById("product-modal").addEventListener("click", (e) => {
-            if (e.target.id === "product-modal") {
-                document.getElementById("product-modal").classList.add("hidden");
-            }
-        });
-
-
-    </script>
+        </script>
 
 </body>
 </html>
