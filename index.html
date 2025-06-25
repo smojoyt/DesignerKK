@@ -186,16 +186,18 @@
             <!-- Close Button -->
             <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl z-10">&times;</button>
 
-            <!-- Left (Mobile Sticky Image | Desktop Image Column) -->
-            <div class="w-full md:w-1/2 relative">
-                <!-- Sticky Image (Mobile only) -->
-                <div id="modal-image-main"
-                     class="w-full aspect-square bg-center bg-cover rounded-t-lg md:rounded-none md:rounded-l-lg sticky top-0 z-0 md:static"></div>
+            <!-- Left (Image + Thumbnails) -->
+            <div class="w-full md:w-1/2 bg-gray-100 flex flex-col md:block">
 
-                <!-- Thumbnails (Mobile scrollable under image) -->
+                <!-- Sticky Image on Mobile / Normal on Desktop -->
+                <div id="modal-image-main"
+                     class="w-full aspect-square bg-center bg-cover sticky top-0 z-0 md:static md:rounded-l-lg"></div>
+
+                <!-- Thumbnails always directly below image -->
                 <div id="modal-thumbnails"
-                     class="flex gap-2 overflow-x-auto p-2 bg-gray-100 md:absolute md:bottom-0 md:left-0 md:right-0 md:p-4 md:bg-transparent"></div>
+                     class="flex gap-2 overflow-x-auto p-2 md:p-4 bg-gray-100 md:bg-transparent border-t md:border-none"></div>
             </div>
+
 
             <!-- Right: Product Info -->
             <div class="w-full md:w-1/2 flex flex-col overflow-y-auto md:overflow-visible max-h-[95vh] p-4 space-y-4">
