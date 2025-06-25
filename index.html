@@ -363,17 +363,8 @@
 
             Promise.all([
                 fetch("https://karrykraze.com/products/products.json").then(res => res.json()),
-                fetch("https://karrykraze.com/products/promotion.json").then(res => res.json()),
-                fetch("https://api.jsonbin.io/v3/b/6842b73d8561e97a50204314").then(res => res.json())
-            ]).then(([products, promotionsFile, reviewsFile]) => {
-
-                const reviews = reviewsFile.record.reviews || [];
-                const reviewsByProductId = {};
-                reviews.forEach(r => {
-                    if (!reviewsByProductId[r.productId]) reviewsByProductId[r.productId] = [];
-                    reviewsByProductId[r.productId].push(r);
-                });
-
+                fetch("https://karrykraze.com/products/promotion.json").then(res => res.json())
+            ]).then(([products, promotionsFile]) => {
                 const promotions = promotionsFile.promotions || [];
                 const updatedProducts = applyPromotionsToProducts(products, promotions);
                 globalProducts = updatedProducts;
@@ -385,11 +376,11 @@
                 }
 
                 // 🧩 Render product cards
-
                 Object.entries(updatedProducts).forEach(([key, p]) => {
                     if (key.includes("_Dummy")) return;
                     if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
 
+                    // 🧠 Convert categories to class selectors
                     const categoryClasses = Array.isArray(p.category)
                         ? p.category.map(c => c.toLowerCase()).map(c => `.${c}`)
                         : [`.${p.category?.toLowerCase()}`];
@@ -397,13 +388,9 @@
                     const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
                     const classList = [...categoryClasses, ...tagClasses].join(" ");
 
-                    const productReviews = reviewsByProductId[p.product_id] || [];S
-
-                    const html = renderCatalogCard(p, key, classList, productReviews);
+                    const html = renderCatalogCard(p, key, classList);
                     container.insertAdjacentHTML("beforeend", html);
                 });
-
-
 
 
 
