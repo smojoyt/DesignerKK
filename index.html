@@ -385,12 +385,43 @@
                 }
 
                 // 🧩 Render product cards
+                function renderCatalogCard(product, key, classList, reviews = []) {
+                    const reviewCount = reviews.length;
+                    const avgRating = reviewCount > 0
+                        ? reviews.reduce((sum, r) => sum + parseInt(r.rating), 0) / reviewCount
+                        : 0;
+
+                    const fullStars = Math.floor(avgRating);
+                    const halfStar = avgRating % 1 >= 0.5;
+                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+                    const starsHtml =
+                        '★'.repeat(fullStars) +
+                        (halfStar ? '½' : '') +
+                        '☆'.repeat(emptyStars);
+
+                    const reviewsHTML = reviewCount > 0
+                        ? `<div class="text-yellow-500 text-sm font-semibold mt-1">${starsHtml} <span class="text-gray-500">(${reviewCount})</span></div>`
+                        : '';
+
+                    return `
+        <div class="item ${classList}" data-key="${key}" data-name="${product.name}" data-price="${product.price}" data-discount="${product.discount || 0}">
+            <div class="rounded overflow-hidden shadow-sm bg-white flex flex-col">
+                <img src="${product.image}" alt="${product.name}" class="w-full aspect-square object-cover" loading="lazy">
+                <div class="p-3 flex flex-col gap-1">
+                    <h3 class="text-lg font-bold">${product.name}</h3>
+                    <div class="text-base font-bold text-green-700">$${product.price.toFixed(2)}</div>
+                    ${reviewsHTML}
+                </div>
+            </div>
+        </div>
+    `;
+                }
 
                 Object.entries(updatedProducts).forEach(([key, p]) => {
                     if (key.includes("_Dummy")) return;
                     if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
 
-                    // 🧠 Convert categories to class selectors
                     const categoryClasses = Array.isArray(p.category)
                         ? p.category.map(c => c.toLowerCase()).map(c => `.${c}`)
                         : [`.${p.category?.toLowerCase()}`];
@@ -398,9 +429,12 @@
                     const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
                     const classList = [...categoryClasses, ...tagClasses].join(" ");
 
-                    const html = renderCatalogCard(p, key, classList);
+                    const productReviews = reviewsByProductId[p.product_id] || [];
+
+                    const html = renderCatalogCard(p, key, classList, productReviews);
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
 
 
 
