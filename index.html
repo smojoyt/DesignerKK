@@ -181,17 +181,24 @@
     <!-- Outer Modal Wrapper -->
     <div id="product-modal"
          class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center px-2">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl max-h-[95vh] overflow-hidden flex flex-col md:flex-row relative">
-            <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl">&times;</button>
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl h-[95vh] overflow-hidden flex flex-col md:flex-row relative">
 
-            <!-- Left: Image Gallery -->
-            <div class="w-full md:w-1/2 bg-gray-100 p-4 overflow-y-auto max-h-[50vh] md:max-h-full">
-                <div id="modal-image-main" class="w-full aspect-square bg-center bg-cover rounded mb-2"></div>
-                <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto"></div>
+            <!-- Close Button -->
+            <button id="modal-close" class="absolute top-2 right-3 text-gray-600 text-2xl z-10">&times;</button>
+
+            <!-- Left (Mobile Sticky Image | Desktop Image Column) -->
+            <div class="w-full md:w-1/2 relative">
+                <!-- Sticky Image (Mobile only) -->
+                <div id="modal-image-main"
+                     class="w-full aspect-square bg-center bg-cover rounded-t-lg md:rounded-none md:rounded-l-lg sticky top-0 z-0 md:static"></div>
+
+                <!-- Thumbnails (Mobile scrollable under image) -->
+                <div id="modal-thumbnails"
+                     class="flex gap-2 overflow-x-auto p-2 bg-gray-100 md:absolute md:bottom-0 md:left-0 md:right-0 md:p-4 md:bg-transparent"></div>
             </div>
 
             <!-- Right: Product Info -->
-            <div class="w-full md:w-1/2 p-4 flex flex-col overflow-y-auto md:overflow-visible max-h-[95vh] space-y-4">
+            <div class="w-full md:w-1/2 flex flex-col overflow-y-auto md:overflow-visible max-h-[95vh] p-4 space-y-4">
 
                 <!-- Product Name & ID -->
                 <div>
@@ -217,7 +224,7 @@
                     <div id="variantSelectorGroup" class="flex gap-4"></div>
                 </div>
 
-                <!-- Purchase Button Immediately Below Variants -->
+                <!-- Purchase Button -->
                 <div>
                     <button id="modal-purchase-btn"
                             class="w-full bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-3 rounded text-lg uppercase transition">
@@ -225,12 +232,13 @@
                     </button>
                 </div>
 
-                <!-- Dropdown Details -->
-                <div id="modal-details-container" class="space-y-2"></div>
+                <!-- Details Sections -->
+                <div id="modal-details-container" class="space-y-2 pb-6"></div>
 
             </div>
         </div>
     </div>
+
 
 
 
@@ -631,23 +639,23 @@
                 const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
 
                 return `
-                    <div class="border-t pt-4">
-                        <button type="button"
-                                class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
-                                data-toggle="${sectionId}">
-                            ${title}
-                            <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
-                                data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        <div id="${sectionId}"
-                            class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
-                            ${listItems}
-                        </div>
-                    </div>`;
+                        <div class="border-t pt-4">
+                            <button type="button"
+                                    class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
+                                    data-toggle="${sectionId}">
+                                ${title}
+                                <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
+                                    data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div id="${sectionId}"
+                                class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+                                ${listItems}
+                            </div>
+                        </div>`;
             }
 
             const sectionsHTML = [
