@@ -357,76 +357,83 @@
         closeBtn?.addEventListener("click", closeSidebar);
         backdrop?.addEventListener("click", closeSidebar);
 
-        // ✅ Setup: Product Grid Rendering From Scratch
-
-        window.addEventListener("DOMContentLoaded", async () => {
+        window.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById("product-grid");
+            const urlParams = new URLSearchParams(window.location.search); // ✅ moved to top
 
-            const [products, promotionsFile, reviewsFile] = await Promise.all([
+            Promise.all([
                 fetch("https://karrykraze.com/products/products.json").then(res => res.json()),
                 fetch("https://karrykraze.com/products/promotion.json").then(res => res.json()),
                 fetch("https://api.jsonbin.io/v3/b/6842b73d8561e97a50204314").then(res => res.json())
-            ]);
+            ]).then(([products, promotionsFile, reviewsFile]) => {
 
-            const reviewsByProductId = {};
-            (reviewsFile.record.reviews || []).forEach(r => {
-                if (!reviewsByProductId[r.productId]) reviewsByProductId[r.productId] = [];
-                reviewsByProductId[r.productId].push(r);
-            });
-
-            const updatedProducts = applyPromotionsToProducts(products, promotionsFile.promotions || []);
-
-            // ✅ Clean Product Grid Render Function
-            const renderCatalogCard = (product, key, reviews = []) => {
-                const reviewCount = reviews.length;
-                const avgRating = reviewCount ? reviews.reduce((sum, r) => sum + parseFloat(r.rating), 0) / reviewCount : 0;
-
-                const fullStars = Math.floor(avgRating);
-                const halfStar = avgRating % 1 >= 0.5;
-                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
-                const starsHtml = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
-                const reviewsHTML = reviewCount
-                    ? `<div class="text-yellow-500 text-sm font-semibold mt-1">${starsHtml} <span class="text-gray-500">(${reviewCount})</span></div>`
-                    : '';
-
-                return `
-      <div class="item bg-white rounded-lg shadow-md overflow-hidden" data-key="${key}" data-name="${product.name}" data-price="${product.price}" data-discount="${product.discount || 0}">
-        <div class="aspect-[4/3] w-full overflow-hidden">
-          <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" loading="lazy">
-        </div>
-        <div class="p-3">
-          <h3 class="text-lg font-bold">${product.name}</h3>
-          <div class="text-base font-bold text-green-700">$${product.price.toFixed(2)}</div>
-          ${reviewsHTML}
-        </div>
-      </div>`;
-            };
-
-            // ✅ Render Filtered Product Cards
-            Object.entries(updatedProducts).forEach(([key, product]) => {
-                if (key.includes("_Dummy")) return;
-                if (!product.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
-
-                const productReviews = reviewsByProductId[product.product_id] || [];
-                container.insertAdjacentHTML("beforeend", renderCatalogCard(product, key, productReviews));
-            });
-
-            // ✅ Masonry / Grid Layout Init
-            imagesLoaded(container, () => {
-                const iso = new Isotope(container, {
-                    itemSelector: ".item",
-                    layoutMode: "fitRows",
-                    getSortData: {
-                        name: '[data-name]',
-                        'price-low': '[data-price] parseFloat',
-                        'price-high': '[data-price] parseFloat',
-                        'best-deals': '[data-discount] parseInt'
-                    }
+                const reviews = reviewsFile.record.reviews || [];
+                const reviewsByProductId = {};
+                reviews.forEach(r => {
+                    if (!reviewsByProductId[r.productId]) reviewsByProductId[r.productId] = [];
+                    reviewsByProductId[r.productId].push(r);
                 });
-            });
-        });
-;
+
+                const promotions = promotionsFile.promotions || [];
+                const updatedProducts = applyPromotionsToProducts(products, promotions);
+                globalProducts = updatedProducts;
+
+                // 🌟 Dynamic Banner from URL category
+                const selectedCategory = urlParams.get("category");
+                if (selectedCategory) {
+                    setBannerFromCategory(selectedCategory, updatedProducts);
+                }
+
+                // 🧩 Render product cards
+
+                function renderCatalogCard(product, key, classList, reviews = []) {
+                    const reviewCount = reviews.length;
+                    const avgRating = reviewCount > 0
+                        ? reviews.reduce((sum, r) => sum + parseInt(r.rating), 0) / reviewCount
+                        : 0;
+
+                    const fullStars = Math.floor(avgRating);
+                    const halfStar = avgRating % 1 >= 0.5;
+                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+                    const stars = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+                    const reviewText = reviewCount > 0
+                        ? `<span class="text-yellow-500 text-sm font-semibold">${stars} <span class="text-gray-500">(${reviewCount})</span></span>`
+                        : '';
+
+                    return `
+        <div class="item ${classList}" data-key="${key}" data-name="${product.name}" data-price="${product.price}" data-discount="${product.discount || 0}">
+            <div class="rounded overflow-hidden shadow-sm bg-white flex flex-col">
+                <img src="${product.image}" alt="${product.name}" class="w-full max-h-64 object-cover rounded-t" loading="lazy">
+                <div class="p-3 flex flex-col gap-1">
+                    <h3 class="text-lg font-bold">${product.name}</h3>
+                    ${reviewText}
+                    <div class="text-base font-bold text-green-700">$${product.price.toFixed(2)}</div>
+                </div>
+            </div>
+        </div>
+    `;
+                }
+
+
+
+
+
+
+
+                imagesLoaded(container, () => {
+                    iso = new Isotope(container, {
+                        sortBy: 'best-deals',
+                        sortAscending: false,
+                        itemSelector: '.item',
+                        layoutMode: 'fitRows',
+                        getSortData: {
+                            name: '[data-name]',
+                            'price-low': '[data-price] parseFloat',
+                            'price-high': '[data-price] parseFloat',
+                            'best-deals': '[data-discount] parseInt'
+                        }
+                    });
 
                     // ✅ Add the event listener here:
                     container.addEventListener("click", (e) => {
