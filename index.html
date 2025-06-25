@@ -178,7 +178,7 @@
 
 
 
-    <div id="product-modal" class="fixed inset-0 z-50 bg-black bg-opacity-70 hidden flex items-center justify-center px-2">
+    <div id="product-modal" class="fixed py-10 inset-0 z-50 bg-black bg-opacity-70 hidden flex items-center justify-center px-2">
         <div class="flex flex-col md:flex-row bg-white rounded-xl w-full max-w-5xl mx-auto max-h-[95vh] md:h-auto overflow-hidden relative">
 
             <!-- Close Button -->
@@ -205,13 +205,13 @@
                 <div class="overflow-y-auto px-6 flex-grow">
                     <!-- Name and ID -->
                     <div>
-                        <h2 id="modal-product-name" class="text-2xl font-bold uppercase text-gray-900"></h2>
-                        <p id="modal-product-id" class="text-xs text-gray-400 mt-1"></p>
+                        <h2 id="modal-product-name" class="mt-0 md:mt-5 text-3xl md:text-4xl font-extrabold uppercase"></h2>
+                        <p id="modal-product-id" class="text-sm text-gray-600"></p>
                     </div>
 
                     <!-- Price -->
                     <div>
-                        <div class="text-green-700 font-bold text-xl">
+                        <div class="text-green-700 font-bold text-3xl italic">
                             <span id="modal-product-price"></span>
                         </div>
                         <div class="text-sm text-gray-500">
@@ -223,13 +223,13 @@
 
                     <!-- Variant Selection -->
                     <div>
-                        <h3 class="uppercase text-sm font-semibold mb-1">Choose a color</h3>
+                        <h3 class="text-lg uppercase font-extrabold block text-gray-600 mb-2 uppercase tracking-wider">Choose a color</h3>
                         <div id="variantSelectorGroup" class="flex gap-3 flex-wrap"></div>
                     </div>
                     <!-- Purchase Button -->
                     <div class="py-2 bg-white bottom-0 z-10">
                         <button id="modal-purchase-btn"
-                                class="w-full bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-3 rounded text-lg uppercase transition duration-200">
+                                class="w-full font-bold bg-yellow-200 text-black tracking-widest py-3 px-4 rounded hover:bg-yellow-300 transition text-center uppercase">
                             Purchase
                         </button>
                     </div>
@@ -648,7 +648,7 @@
                 return `
                                     <div class="border-t pt-4">
                                         <button type="button"
-                                                class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
+                                                class="toggle-btn group w-full flex justify-between items-center text-left font-extrabold text-gray-900 uppercase tracking-wide"
                                                 data-toggle="${sectionId}">
                                             ${title}
                                             <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
