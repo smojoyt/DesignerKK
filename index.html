@@ -397,33 +397,10 @@
                     const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
                     const classList = [...categoryClasses, ...tagClasses].join(" ");
 
-                    const productReviews = reviewsByProductId[p.product_id] || [];
+                    const productReviews = reviewsByProductId[p.product_id] || [];S
 
                     const html = renderCatalogCard(p, key, classList, productReviews);
                     container.insertAdjacentHTML("beforeend", html);
-                });
-                // After all products rendered
-                document.querySelectorAll('.item').forEach(item => {
-                    const key = item.dataset.key;
-                    const product = updatedProducts[key];
-                    const reviews = reviewsByProductId[product.product_id] || [];
-
-                    if (reviews.length === 0) return;
-
-                    const avgRating = reviews.reduce((sum, r) => sum + parseInt(r.rating), 0) / reviews.length;
-                    const fullStars = Math.floor(avgRating);
-                    const halfStar = avgRating % 1 >= 0.5;
-                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-                    const stars = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
-
-                    const span = document.createElement('span');
-                    span.className = 'text-yellow-500 text-sm font-semibold';
-                    span.innerHTML = `${stars} <span class="text-gray-500">(${reviews.length})</span>`;
-
-                    const titleEl = item.querySelector('h3');
-                    if (titleEl) {
-                        titleEl.insertAdjacentElement('afterend', span);
-                    }
                 });
 
 
