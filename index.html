@@ -540,16 +540,16 @@
             const modalThumbnails = document.getElementById("modal-thumbnails");
             const variantGroup = document.getElementById("variantSelectorGroup");
             const purchaseBtn = document.getElementById("modal-purchase-btn");
+            const detailsContainer = document.getElementById("modal-details-container");
 
             modal.dataset.key = productKey;
             modalName.textContent = product.name;
-            modalId.textContent = `Product ID: ${product.product_id || productKey}`;
+            modalId.textContent = `Product ID: ${product.checkout_product_id || productKey}`;
             modalImageMain.style.backgroundImage = `url(${product.thumbnails?.[0] || product.image})`;
 
-            // Set price & discount info
+            // Price + Discounts
             const salePrice = parseFloat(product.price);
-            const originalPrice = parseFloat(product.original_price || product.price); // fallback if no discount
-
+            const originalPrice = parseFloat(product.original_price || product.price);
             modalPrice.textContent = `$${salePrice.toFixed(2)}`;
 
             if (originalPrice > salePrice) {
@@ -568,7 +568,7 @@
 
             // Thumbnails
             modalThumbnails.innerHTML = "";
-            (product.thumbnails || [product.image]).forEach((thumb, i) => {
+            (product.thumbnails || [product.image]).forEach((thumb) => {
                 const img = document.createElement("img");
                 img.src = thumb;
                 img.className = "w-16 h-16 object-cover rounded cursor-pointer border";
@@ -578,7 +578,7 @@
                 modalThumbnails.appendChild(img);
             });
 
-            // Variants (custom1Options)
+            // Variants
             const variants = product.custom1Options?.split("|") || ["Default"];
             variantGroup.innerHTML = "";
 
@@ -597,7 +597,7 @@
 
                 const circle = document.createElement("div");
                 circle.className = `w-8 h-8 rounded-full border-2 border-black`;
-                circle.style.backgroundColor = variant.toLowerCase(); // naive color support
+                circle.style.backgroundColor = variant.toLowerCase();
 
                 const text = document.createElement("span");
                 text.className = "text-xs mt-1";
@@ -609,117 +609,85 @@
                 variantGroup.appendChild(label);
             });
 
-            // Purchase Button
+            // Purchase Logic
             purchaseBtn.onclick = () => {
                 const productKey = modal.dataset.key;
                 const product = globalProducts[productKey];
-
-                if (!product) {
-                    console.error("❌ Product not found:", productKey);
-                    return;
-                }
+                if (!product) return;
 
                 const checkoutId = product.checkout_product_id || productKey;
                 const selectedVariant = document.querySelector('input[name="variant"]:checked')?.value || "Default";
                 const quantity = 1;
-
                 const productString = `${checkoutId}-${selectedVariant}:${quantity}`;
                 const checkoutUrl = `https://buy.karrykraze.com/checkout/index.html?products=${encodeURIComponent(productString)}&cart_origin=overlay`;
-
                 window.location.href = checkoutUrl;
             };
 
-            const detailsContainer = document.getElementById("modal-details-container");
-            detailsContainer.innerHTML = ""; // Clear existing content
+            // ---------- DETAILS DROPDOWNS ----------
+            detailsContainer.innerHTML = "";
 
-            // Helper function to build collapsible section
-            function createDropdownSection(title, items = [], isOpen = false) {
+            function createDropdownSection(title, items = []) {
                 if (!items || items.length === 0) return "";
 
                 const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
-                const listItems = items.map(item =>
-                    `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`
-                ).join("");
+                const listItems = items.map(item => `<li class="text-sm text-gray-800 leading-relaxed list-disc list-inside">${item}</li>`).join("");
 
                 return `
-    <div class="border-t pt-4">
-      <button type="button"
-              class="group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
-              data-toggle="${sectionId}">
-        ${title}
-        <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300 group-[.open]:rotate-180"
-             data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
-             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </button>
-      <div id="${sectionId}"
-           class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
-        ${listItems}
-      </div>
-    </div>
-  `;
+        <div class="border-t pt-4">
+            <button type="button"
+                    class="toggle-btn group w-full flex justify-between items-center text-left font-bold text-gray-900 uppercase tracking-wide"
+                    data-toggle="${sectionId}">
+                ${title}
+                <svg class="w-4 h-4 text-gray-600 transform transition-transform duration-300"
+                    data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <div id="${sectionId}"
+                class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 opacity-0 mt-2 pl-4 space-y-1">
+                ${listItems}
+            </div>
+        </div>`;
             }
 
-
-            // 📦 Clear existing
-            detailsContainer.innerHTML = "";
-
-            // 📜 Build standard product sections
             const sectionsHTML = [
                 createDropdownSection("Description", product.descriptionList),
                 createDropdownSection("Key Details", product.keyDetails),
                 createDropdownSection("Sizing Info", product.sizingInfo),
                 createDropdownSection("Care Instructions", product.careInstructions),
+                createDropdownSection("Shipping & Returns", [
+                    "Free standard shipping on all U.S. orders over $50",
+                    "Orders ship within 2–3 business days",
+                    "30-day hassle-free returns for unused items"
+                ])
             ];
 
-            // 📦 Add Shipping & Returns
-            const shippingReturns = [
-                "Free standard shipping on all U.S. orders over $50",
-                "Orders ship within 2–3 business days",
-                "30-day hassle-free returns for unused items"
-            ];
-            sectionsHTML.push(createDropdownSection("Shipping & Returns", shippingReturns));
-
-            // ✅ Render all dropdowns
             detailsContainer.insertAdjacentHTML("beforeend", sectionsHTML.join(""));
 
-            // 🔄 Animate dropdowns
             detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const id = btn.getAttribute("data-toggle");
                     const content = document.getElementById(id);
                     const arrow = btn.querySelector(`[data-arrow="${id}"]`);
-                    const isOpen = content.classList.contains("max-h-[1000px]");
 
-                    if (isOpen) {
-                        content.classList.remove("max-h-[1000px]", "opacity-100");
-                        content.classList.add("max-h-0", "opacity-0");
-                        btn.classList.remove("group-[.open]");
-                    } else {
+                    const isOpen = content.classList.contains("max-h-[1000px]");
+                    if (content.classList.contains("max-h-0")) {
                         content.classList.remove("max-h-0", "opacity-0");
                         content.classList.add("max-h-[1000px]", "opacity-100");
-                        btn.classList.add("group-[.open]");
+                        arrow.classList.add("rotate-180");
+                    } else {
+                        content.classList.remove("max-h-[1000px]", "opacity-100");
+                        content.classList.add("max-h-0", "opacity-0");
+                        arrow.classList.remove("rotate-180");
                     }
                 });
             });
 
-
-            // Attach toggle functionality
-            detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.getAttribute("data-toggle");
-                    const list = document.getElementById(id);
-                    const arrow = btn.querySelector(`[data-arrow="${id}"]`);
-                    list.classList.toggle("hidden");
-                    arrow.classList.toggle("rotate-180");
-                });
-            });
-
-
             modal.classList.remove("hidden");
         }
+
 
 
 
