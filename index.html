@@ -400,22 +400,25 @@
                         (halfStar ? '½' : '') +
                         '☆'.repeat(emptyStars);
 
+                    // Only show if there are reviews
+                    const reviewsHTML = reviewCount > 0
+                        ? `<div class="text-yellow-500 text-sm font-semibold mt-1">${starsHtml} <span class="text-gray-500">(${reviewCount})</span></div>`
+                        : '';
+
                     return `
         <div class="item ${classList}" data-key="${key}" data-name="${product.name}" data-price="${product.price}" data-discount="${product.discount || 0}">
             <div class="rounded overflow-hidden shadow-sm bg-white flex flex-col">
                 <img src="${product.image}" alt="${product.name}" class="w-full aspect-square object-cover" loading="lazy">
                 <div class="p-3 flex flex-col gap-1">
                     <h3 class="text-lg font-bold">${product.name}</h3>
-                    ${reviewCount > 0
-                            ? `<div class="text-yellow-500 text-sm font-semibold">${starsHtml} <span class="text-gray-500">(${reviewCount})</span></div>`
-                            : `<div class="text-sm text-gray-400 italic">No reviews yet</div>`
-                        }
                     <div class="text-base font-bold text-green-700">$${product.price.toFixed(2)}</div>
+                    ${reviewsHTML}
                 </div>
             </div>
         </div>
     `;
                 }
+
 
                 Object.entries(updatedProducts).forEach(([key, p]) => {
                     if (key.includes("_Dummy")) return;
