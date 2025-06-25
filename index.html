@@ -398,10 +398,36 @@
                     const classList = [...categoryClasses, ...tagClasses].join(" ");
 
                     const productReviews = reviewsByProductId[p.product_id] || [];
+                    const reviewCount = productReviews.length;
+                    const avgRating = reviewCount > 0
+                        ? productReviews.reduce((sum, r) => sum + parseInt(r.rating), 0) / reviewCount
+                        : 0;
 
-                    const html = renderCatalogCard(p, key, classList, productReviews);
+                    const fullStars = Math.floor(avgRating);
+                    const halfStar = avgRating % 1 >= 0.5;
+                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+                    const stars = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+                    const reviewText = reviewCount > 0
+                        ? `<span class="text-yellow-500 text-sm font-semibold">${stars} <span class="text-gray-500">(${reviewCount})</span></span>`
+                        : '';
+
+                    const html = `
+        <div class="item ${classList}" data-key="${key}" data-name="${p.name}" data-price="${p.price}" data-discount="${p.discount || 0}">
+            <div class="rounded overflow-hidden shadow-sm bg-white flex flex-col">
+                <img src="${p.image}" alt="${p.name}" class="w-full max-h-64 object-cover rounded-t" loading="lazy">
+                <div class="p-3 flex flex-col gap-1">
+                    <h3 class="text-lg font-bold">${p.name}</h3>
+                    ${reviewText}
+                    <div class="text-base font-bold text-green-700">$${p.price.toFixed(2)}</div>
+                </div>
+            </div>
+        </div>
+    `;
+
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
 
 
 
