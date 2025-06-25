@@ -193,13 +193,13 @@
             <div class="w-full md:w-1/2 p-4 flex flex-col justify-between">
                 <div class="space-y-4">
 
-                    <!-- Product Name & ID -->
+                    <!-- Product Name & Checkout ID -->
                     <div>
                         <h2 id="modal-product-name" class="text-2xl font-extrabold text-gray-900 uppercase"></h2>
                         <p id="modal-product-id" class="text-sm text-gray-600"></p>
                     </div>
 
-                    <!-- Pricing Section -->
+                    <!-- Pricing -->
                     <div class="space-y-1">
                         <p class="text-green-700 font-bold text-lg">
                             Now <span id="modal-product-price" class="text-2xl"></span>
@@ -211,21 +211,25 @@
                         </div>
                     </div>
 
-                    <!-- Color Variants -->
+                    <!-- Variants -->
                     <div>
                         <h3 class="text-sm font-semibold uppercase mb-1">Choose a color</h3>
-                        <div id="variantSelectorGroup" class="flex gap-4">
-                            <!-- Radio buttons for variants will be injected here -->
-                        </div>
+                        <div id="variantSelectorGroup" class="flex gap-4"></div>
                     </div>
                 </div>
 
-                <!-- Add to Cart Button -->
+                <!-- Purchase Button -->
                 <div class="mt-6">
                     <button id="modal-purchase-btn"
                             class="w-full bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-3 rounded text-center text-lg uppercase transition">
-                        Add to Cart
+                        Purchase
                     </button>
+                </div>
+
+                <!-- Collapsible Details -->
+                <div class="mt-6 space-y-2">
+                    <!-- Each section will be injected here -->
+                    <div id="modal-details-container"></div>
                 </div>
             </div>
         </div>
@@ -624,6 +628,49 @@
 
                 window.location.href = checkoutUrl;
             };
+
+            const detailsContainer = document.getElementById("modal-details-container");
+            detailsContainer.innerHTML = ""; // Clear existing content
+
+            // Helper function to build collapsible section
+            function createDropdownSection(title, items = []) {
+                if (!items || items.length === 0) return "";
+
+                const sectionId = `section-${title.toLowerCase().replace(/\s+/g, "-")}-${productKey}`;
+                const listItems = items.map(item => `<li class="list-disc list-inside text-sm text-gray-700">${item}</li>`).join("");
+
+                return `
+    <div class="border-b pb-2">
+      <button type="button" class="w-full flex justify-between items-center text-left font-semibold text-gray-800 py-2" data-toggle="${sectionId}">
+        ${title}
+        <svg class="w-4 h-4 transform transition-transform" data-arrow="${sectionId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <ul id="${sectionId}" class="hidden pl-4 mt-2 space-y-1">${listItems}</ul>
+    </div>
+  `;
+            }
+
+            // Insert all dropdown sections
+            detailsContainer.insertAdjacentHTML("beforeend", [
+                createDropdownSection("Description", product.descriptionList),
+                createDropdownSection("Key Details", product.keyDetails),
+                createDropdownSection("Sizing Info", product.sizingInfo),
+                createDropdownSection("Care Instructions", product.careInstructions)
+            ].join(""));
+
+            // Attach toggle functionality
+            detailsContainer.querySelectorAll("button[data-toggle]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = btn.getAttribute("data-toggle");
+                    const list = document.getElementById(id);
+                    const arrow = btn.querySelector(`[data-arrow="${id}"]`);
+                    list.classList.toggle("hidden");
+                    arrow.classList.toggle("rotate-180");
+                });
+            });
+
 
             modal.classList.remove("hidden");
         }
