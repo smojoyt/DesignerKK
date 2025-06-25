@@ -211,7 +211,9 @@
             };
 
             const matching = Object.values(products).filter(p =>
-                p.category?.toLowerCase() === category.toLowerCase() && p.banner
+                Array.isArray(p.category)
+                    ? p.category.map(c => c.toLowerCase()).includes(category.toLowerCase())
+                    : p.category?.toLowerCase() === category.toLowerCase()
             );
 
             if (matching.length > 0) {
@@ -294,11 +296,21 @@
 
                 // 🧩 Render product cards
                 Object.entries(updatedProducts).forEach(([key, p]) => {
-                    if (key.includes("_Dummy")) return; // 👈 skip dummy entries
+                    if (key.includes("_Dummy")) return;
                     if (!p.tags?.map(t => t.toLowerCase()).includes("designerbags")) return;
-                    const html = renderCatalogCard(p, key); // 🔁 pass key here
+
+                    // 🧠 Convert categories to class selectors
+                    const categoryClasses = Array.isArray(p.category)
+                        ? p.category.map(c => c.toLowerCase()).map(c => `.${c}`)
+                        : [`.${p.category?.toLowerCase()}`];
+
+                    const tagClasses = (p.tags || []).map(t => `.${t.toLowerCase()}`);
+                    const classList = [...categoryClasses, ...tagClasses].join(" ");
+
+                    const html = renderCatalogCard(p, key, classList);
                     container.insertAdjacentHTML("beforeend", html);
                 });
+
 
 
 
